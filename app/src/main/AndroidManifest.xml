@@ -23,12 +23,15 @@
         <activity
             android:name=".rendering.MainActivity_game_page"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoBar"></activity>
-        <activity
-            android:name=".rendering.MainActivity_game_Choose_page"
+            android:theme="@style/AppTheme.NoBar">
+
+        </activity>
+
+        <activity android:name=".rendering.MainActivity_game_choose_page"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoBar"></activity>
-        <activity android:name=".rendering.MainActivity_game_choose_page"></activity>
+            android:theme="@style/AppTheme.NoBar">
+
+        </activity>
     </application>
 
 </manifest>
