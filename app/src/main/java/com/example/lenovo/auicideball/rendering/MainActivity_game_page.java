@@ -229,7 +229,6 @@ public class MainActivity_game_page extends AppCompatActivity {
             for (int i = 0 ; i<30 ; i++){
                 if (Math.abs((mPosX+30)-score_coordinates.get(i).getmSX())<=mK){
                     if (Math.abs((mPosY+40)-score_coordinates.get(i).getmSY())<=mK){
-//                        mCanvas.drawText("加1分!!!!"+mPosX,600,400,mPaint);//TODO
                         score_coordinates.get(i).setmSX(random.nextInt(mScreenWidth)%(mScreenWidth-5+1) + 5);
                         score_coordinates.get(i).setmSY(random.nextInt(mScreenHeight)%(mScreenHeight-5+1) + 5);
                         game_Score++;
@@ -239,11 +238,11 @@ public class MainActivity_game_page extends AppCompatActivity {
 
             /*小球游戏结束*/
             if (mIsRunning == false){
-                mCanvas.drawText("游戏结束！！！"+mPosX,500,200,mPaint);
-//                mCanvas.drawColor(Color.TRANSPARENT,PorterDuff.Mode.CLEAR);
+                mCanvas.drawText("游戏结束！！！",500,200,mPaint);
+                //TODO
             }
 
-            mCanvas.drawText("分数"+game_Score,10,50,mPaint);
+            mCanvas.drawText("分数"+game_Score,20,50,mPaint);
         }
 
         @Override
@@ -306,6 +305,7 @@ public class MainActivity_game_page extends AppCompatActivity {
                     if (Math.abs((mPosX+30)-boom_coordinates.get(k).getmBX())<=mK){
                         if (Math.abs((mPosY+40)-boom_coordinates.get(k).getmBY())<=mK){
                             surfaceDestroyed(mSurfaceHolder);
+                            Draw();
                         }
                     }
                 }
