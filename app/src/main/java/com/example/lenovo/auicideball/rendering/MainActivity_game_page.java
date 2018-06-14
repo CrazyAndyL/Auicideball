@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -105,6 +106,9 @@ public class MainActivity_game_page extends AppCompatActivity {
         /*坐标可误差值*/
         private float mK= 50;
 
+        /*游戏得分*/
+        int game_Score = 0;
+
         /*重力感应X轴 Y轴 Z轴的重力值*/
         private float mGX = 0;
         private float mGY = 0;
@@ -126,7 +130,10 @@ public class MainActivity_game_page extends AppCompatActivity {
             mCanvas = new Canvas();
             /*创建曲线画笔*/
             mPaint = new Paint();
-            mPaint.setColor(Color.BLUE);
+            mPaint.setColor(Color.parseColor("#ffffff"));
+            mPaint.setTextSize(50);
+            mPaint.setTypeface(Typeface.DEFAULT_BOLD);
+
             /*加载小球资源*/
             mbitmapBall = BitmapFactory.decodeResource(this.getResources(),R.drawable.ball);
             /*加载背景资源*/
@@ -171,7 +178,7 @@ public class MainActivity_game_page extends AppCompatActivity {
         }
 
         private void Draw(){
-            int game_Score = 0;
+
             /*得到当前屏幕宽高*/
             mScreenWidth = this.getWidth();
             mScreenHeight = this.getHeight();
@@ -236,7 +243,7 @@ public class MainActivity_game_page extends AppCompatActivity {
 //                mCanvas.drawColor(Color.TRANSPARENT,PorterDuff.Mode.CLEAR);
             }
 
-            mCanvas.drawText("游戏分数"+game_Score,mScreenWidth/2,10,mPaint);
+            mCanvas.drawText("分数"+game_Score,10,50,mPaint);
         }
 
         @Override
