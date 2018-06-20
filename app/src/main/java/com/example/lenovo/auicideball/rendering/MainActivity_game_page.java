@@ -32,6 +32,8 @@ import static android.hardware.SensorManager.DATA_X;
 public class MainActivity_game_page extends AppCompatActivity {
 
     MyView mAnimView = null;
+    private int game_choose = 0 ;
+    private static String str = "choose_game";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,19 @@ public class MainActivity_game_page extends AppCompatActivity {
 
     }
 
+    public static Intent newIntent(MainActivity_Choose_game_page mainActivity_choose_game_page, int game_choose) {
+        Intent intent = new Intent(mainActivity_choose_game_page,MainActivity_game_page.class);
+        intent.putExtra(str,game_choose);
+        return intent;
+    }
+
+
+
     public class MyView extends SurfaceView implements SurfaceHolder.Callback,Runnable,SensorEventListener{
+
+        int Soced = 0;
+        int Lightning = 0 ;
+        int Boom = 0 ;
 
         /*游戏画笔*/
         Paint mPaint;
@@ -145,8 +159,25 @@ public class MainActivity_game_page extends AppCompatActivity {
             /*加载分数随机资源*/
             mbitmapSoced = BitmapFactory.decodeResource(this.getResources(),R.drawable.scored);
 
+            game_choose = getIntent().getIntExtra(str,game_choose);
+            if (game_choose == 1){
+                Soced = 40;
+                Lightning = 30 ;
+                Boom = 20 ;
+            }
+            else if (game_choose == 2){
+                Soced = 30 ;
+                Lightning = 20 ;
+                Boom = 25 ;
+            }
+            else {
+                Soced = 35;
+                Lightning = 30 ;
+                Boom = 40 ;
+            }
+
             /*添加分数*/
-            for(int i = 0 ; i < 30 ; i++){
+            for(int i = 0 ; i < Soced ; i++){
                 Score_coordinate score_coordinate =new Score_coordinate();
                 score_coordinate.setmSX(random.nextInt(2000)%(2000-5+1) + 5);
                 score_coordinate.setmSY(random.nextInt(1000)%(1000-5+1) + 5);
@@ -154,7 +185,7 @@ public class MainActivity_game_page extends AppCompatActivity {
             }
 
             /*添加闪电*/
-            for (int j = 0 ; j < 10 ; j++){
+            for (int j = 0 ; j < Lightning ; j++){
                 Lightning_coordinate lightning_coordinate = new Lightning_coordinate();
                 lightning_coordinate.setmLX(random.nextInt(2000)%(2000-5+1) + 5);
                 lightning_coordinate.setmLY(random.nextInt(1000)%(1000-5+1) + 5);
@@ -162,7 +193,7 @@ public class MainActivity_game_page extends AppCompatActivity {
             }
 
             /*添加地雷*/
-            for (int k = 0 ; k < 5 ; k++){
+            for (int k = 0 ; k < Boom ; k++){
                 Boom_coordinate boom_coordinate = new Boom_coordinate();
                 boom_coordinate.setmBX(random.nextInt(2000)%(2000-5+1) + 5);
                 boom_coordinate.setmBY(random.nextInt(2000)%(2000-5+1) + 5);
@@ -187,14 +218,14 @@ public class MainActivity_game_page extends AppCompatActivity {
             mCanvas.drawBitmap(mbitmapBg,0,0,mPaint);
 
             /*描绘地雷*/
-            for (int k = 0 ; k < 5 ; k++){
+            for (int k = 0 ; k < Boom ; k++){
                 mCanvas.drawBitmap(mbitmapBoom,boom_coordinates.get(k).getmBX(),
                         boom_coordinates.get(k).getmBY(),
                         mPaint);
             }
 
             /*描绘分数*/
-            for (int i = 0 ; i < 30 ; i++){
+            for (int i = 0 ; i < Soced ; i++){
                 mCanvas.drawBitmap(mbitmapSoced,
                         score_coordinates.get(i).getmSX(),
                         score_coordinates.get(i).getmSY(),
@@ -202,7 +233,7 @@ public class MainActivity_game_page extends AppCompatActivity {
             }
 
             /*绘制闪电*/
-            for (int j = 0 ; j < 10 ; j++){
+            for (int j = 0 ; j < Lightning ; j++){
                 mCanvas.drawBitmap(mbitmapLightning,
                         lightning_coordinates.get(j).getmLX(),
                         lightning_coordinates.get(j).getmLY(),
@@ -213,20 +244,25 @@ public class MainActivity_game_page extends AppCompatActivity {
             mCanvas.drawBitmap(mbitmapBall,mPosX,mPosY,mPaint);
 
             /*小球误差范围内加速度*/
-            for (int j = 0 ; j < 10 ; j++){
+            for (int j = 0 ; j < Lightning ; j++){
                 if (Math.abs((mPosX+30)-lightning_coordinates.get(j).getmLX())<=mK){
                     if (Math.abs((mPosY+40)-lightning_coordinates.get(j).getmLY())<=mK){
-//                        mCanvas.drawText("速度加快",600,500,mPaint);
                         lightning_coordinates.get(j).setmLX(random.nextInt(mScreenWidth)%(mScreenWidth-5+1) + 5);
                         lightning_coordinates.get(j).setmLY(random.nextInt(mScreenHeight)%(mScreenHeight-5+1) + 5);
                         a= (float) (a+0.3);
+                        if (j%2 == 0){
+                            boom_coordinates.get(j).setmBX(random.nextInt(mScreenWidth)%(mScreenWidth-5+1) + 5);
+                            boom_coordinates.get(j).setmBY(random.nextInt(mScreenWidth)%(mScreenWidth-5+1) + 5);
+                            score_coordinates.get(j).setmSX(random.nextInt(mScreenWidth)%(mScreenWidth-5+1) + 5);
+                            score_coordinates.get(j).setmSY(random.nextInt(mScreenHeight)%(mScreenHeight-5+1) + 5);
+                        }
 
                     }
                 }
             }
 
             /*小球误差值内加分*/
-            for (int i = 0 ; i<30 ; i++){
+            for (int i = 0 ; i<Soced ; i++){
                 if (Math.abs((mPosX+30)-score_coordinates.get(i).getmSX())<=mK){
                     if (Math.abs((mPosY+40)-score_coordinates.get(i).getmSY())<=mK){
                         score_coordinates.get(i).setmSX(random.nextInt(mScreenWidth)%(mScreenWidth-5+1) + 5);
@@ -283,7 +319,7 @@ public class MainActivity_game_page extends AppCompatActivity {
                 }
 
                 /*小球吃闪电*/
-                for (int j = 0 ; j < 10 ; j++){
+                for (int j = 0 ; j < Lightning ; j++){
                     if (Math.abs((mPosX+30)-lightning_coordinates.get(j).getmLX())<=mK){
                         if (Math.abs((mPosY+40)-lightning_coordinates.get(j).getmLY())<=mK){
                             Draw();
@@ -292,7 +328,7 @@ public class MainActivity_game_page extends AppCompatActivity {
                 }
 
                 /*小球得分*/
-                for (int i = 0 ; i<30 ; i++){
+                for (int i = 0 ; i<Soced ; i++){
                     if (Math.abs((mPosX+30)-score_coordinates.get(i).getmSX())<=mK){
                         if (Math.abs((mPosY+40)-score_coordinates.get(i).getmSY())<=mK){
                            Draw();
@@ -301,11 +337,11 @@ public class MainActivity_game_page extends AppCompatActivity {
                 }
 
                 /*小球吃雷*/
-                for (int k =  0 ; k < 5 ; k++){
+                for (int k =  0 ; k < Boom ; k++){
                     if (Math.abs((mPosX+30)-boom_coordinates.get(k).getmBX())<=mK){
                         if (Math.abs((mPosY+40)-boom_coordinates.get(k).getmBY())<=mK){
                             surfaceDestroyed(mSurfaceHolder);
-                            Draw();
+//                            Draw();
                         }
                     }
                 }

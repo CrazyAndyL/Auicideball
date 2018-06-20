@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -12,4 +12,20 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <!--<style name="AppTheme.NoTitle">-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+    <!--</style>-->
+
+    <style name="AppTheme.Activity_Style">
+        <item name="android:windowBackground">@android:color/transparent</item> //窗口背景色
+        <item name="android:windowFrame">@null</item> //windowFrame框无
+        <item name="android:windowNoTitle">true</item>  //去除标题栏
+        <item name="android:windowIsFloating">true</item>  //浮现在activity之上
+        <item name="android:windowIsTranslucent">true</item>  //窗口半透明
+        <item name="android:windowContentOverlay">@null</item>  //消除边框黑线
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>  //窗口弹出效果
+        <item name="android:backgroundDimEnabled">true</item>  //允许背景模糊
+    </style>
+
 </resources>

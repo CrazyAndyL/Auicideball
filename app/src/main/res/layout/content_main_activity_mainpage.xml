@@ -8,6 +8,20 @@
     tools:showIn="@layout/activity_main_mainpage"
     android:background="@drawable/homepage_bg">
 
+    <ImageButton
+        android:id="@+id/Image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginLeft="20dp"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ball"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/homepage_logo"
         android:layout_width="486dp"
