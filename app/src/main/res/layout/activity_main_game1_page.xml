@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".rendering.MainActivity_game_page">
+    tools:context=".rendering.MainActivity_game1_page">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/root1">
-
+        android:layout_height="match_parent">
 
     </android.support.constraint.ConstraintLayout>
 

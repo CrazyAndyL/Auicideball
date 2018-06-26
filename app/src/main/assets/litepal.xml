@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="User_Data"></dbname>
+    <version value="1"></version>
+
+    <list>
+        <mapping class="com.example.lenovo.auicideball.backstage.User_data"/>
+        <mapping class="com.example.lenovo.auicideball.backstage.Remember_User"/>
+    </list>
+</litepal>

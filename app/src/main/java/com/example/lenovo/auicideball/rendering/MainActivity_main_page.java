@@ -12,10 +12,13 @@ import android.widget.ImageButton;
 
 import com.example.lenovo.auicideball.R;
 
+
 public class MainActivity_main_page extends AppCompatActivity {
     private Button mStart_game_button;
     private Button mSetting_button;
     private ImageButton mImageButton;
+    private Button mRank_list_Burron;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +28,21 @@ public class MainActivity_main_page extends AppCompatActivity {
         mStart_game_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent = new Intent(MainActivity_main_page.this,MainActivity_Choose_game_page.class);
+               Intent intent = new Intent(MainActivity_main_page.this,MainActivity_game_page.class);
                startActivity(intent);
             }
         });
+
+        //TODO
+        mRank_list_Burron = (Button) findViewById(R.id.rank_list_button);
+        mRank_list_Burron.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity_main_page.this,MainActivity_register_login_page.class);
+                startActivity(intent);
+            }
+        });
+
 
         mSetting_button = (Button) findViewById(R.id.setting_button);
         mSetting_button.setOnClickListener(new View.OnClickListener() {
