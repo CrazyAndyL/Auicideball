@@ -38,7 +38,7 @@ import java.util.Stack;
 
 import static android.hardware.SensorManager.DATA_X;
 
-public class MainActivity_game_page extends AppCompatActivity {
+public class  MainActivity_game_page extends AppCompatActivity {
 
     MyView mAnimView = null;
 
