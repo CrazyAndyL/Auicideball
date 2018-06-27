@@ -44,6 +44,10 @@
             android:name=".rendering.MainActivity_Register_page"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.Activity_Style" />
+        <activity
+            android:name=".rendering.MainActivity_Login_page"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.Activity_Style" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -55,15 +59,12 @@
                 android:resource="@xml/photo_provider" />
         </provider>
 
+        <activity android:name=".rendering.MainActivity_game1_page" />
         <activity
-            android:name=".rendering.MainActivity_Login_page"
+            android:name=".rendering.MainActivity_Rank_List_page"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.Activity_Style" />
-        <activity
-            android:name=".rendering.MainActivity_game_rank_list"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.Activity_Style" />
-        <activity android:name=".rendering.MainActivity_game1_page"></activity>
+            android:theme="@style/AppTheme.Activity_Style"></activity>
+        <activity android:name=".rendering.MainActivity_game_end_page"></activity>
     </application>
 
 </manifest>

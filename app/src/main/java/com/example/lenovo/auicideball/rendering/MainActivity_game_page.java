@@ -32,6 +32,7 @@ import com.example.lenovo.auicideball.backstage.Score_coordinate;
 import com.example.lenovo.auicideball.backstage.Wall_coordinate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Stack;
 
@@ -91,7 +92,7 @@ public class MainActivity_game_page extends AppCompatActivity {
         private Bitmap mbitmapLightning;
 
         /*速度值*/
-        float a = 1;
+        float a = (float) 0.5;
 
         /*分数资源图片*/
         private Bitmap mbitmapSoced;
@@ -117,6 +118,8 @@ public class MainActivity_game_page extends AppCompatActivity {
 
         /*Wall数组*/
         ArrayList<Wall_coordinate> wall_coordinates = new ArrayList<>();
+
+        HashMap<Wall_coordinate,String> map = new HashMap<>();
 
         /*随机数*/
         Random random = new Random();
@@ -190,6 +193,7 @@ public class MainActivity_game_page extends AppCompatActivity {
                         wall_coordinate.setmWX(i*70);
                         wall_coordinate.setmWY(j*70);
                         wall_coordinates.add(wall_coordinate);
+                        map.put(wall_coordinate,"IsWall");
 
                     }
                 }

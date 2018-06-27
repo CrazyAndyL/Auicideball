@@ -19,6 +19,7 @@ import com.example.lenovo.auicideball.R;
 import com.example.lenovo.auicideball.backstage.Remember_User;
 import com.example.lenovo.auicideball.backstage.User_data;
 
+import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
@@ -36,11 +37,14 @@ public class MainActivity_Login_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__login_page);
-        usernameEdit= (EditText) findViewById(R.id.user_name_login);
+        LitePal.getDatabase();
         Remember_User first = DataSupport.findFirst(Remember_User.class);
+
+        usernameEdit= (EditText) findViewById(R.id.user_name_login);
         usernameEdit.setText(first.getUser_name());
-        passwordEdit.setText(first.getPassword());
+
         passwordEdit=(EditText)findViewById(R.id.pass_word_login);
+        passwordEdit.setText(first.getPassword());
 
         register_button = (Button)findViewById(R.id.Register_button);
         register_button.setOnClickListener(new View.OnClickListener() {      //跳转到注册界面
@@ -72,10 +76,8 @@ public class MainActivity_Login_page extends AppCompatActivity {
                             remember_user.setPassword(password);
                             remember_user.save();
                             login_check = true;
-//                            Intent intent = new Intent(MainActivity_Login_page.this,Game_List.class);
-//                            intent.putExtra("extra_data",username);
-//                            startActivity(intent);                     //TODO  传递用户名给排行榜
-
+                            Intent intent = new Intent(MainActivity_Login_page.this,MainActivity_main_page.class);
+                            startActivity(intent);
                         }else {
                             Toast.makeText(MainActivity_Login_page.this,"密码不正确",Toast.LENGTH_SHORT).show();
                         }
@@ -95,9 +97,9 @@ public class MainActivity_Login_page extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                }else{
                     editText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else{
+                    editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }
         });

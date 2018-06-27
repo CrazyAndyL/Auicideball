@@ -22,7 +22,8 @@ public class MainActivity_register_login_page extends AppCompatActivity {
         mLogin_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
+                Intent intent = new Intent(MainActivity_register_login_page.this,MainActivity_Login_page.class);
+                startActivity(intent);
             }
         });
         mRegister_button = (Button) findViewById(R.id.Register_button);

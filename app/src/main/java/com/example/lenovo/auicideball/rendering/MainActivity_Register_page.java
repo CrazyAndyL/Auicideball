@@ -81,7 +81,7 @@ public class MainActivity_Register_page extends AppCompatActivity {
                                 User_data user_data = new User_data();
                                 user_data.setUser_name(username);
                                 user_data.setPassword(password);
-//                                user_data.setHead_portrait(path);
+                                user_data.setHead_portrait("");
                                 user_data.setScore(0);
                                 user_data.save();
                                 Remember_User remember_user = new Remember_User();
@@ -95,8 +95,8 @@ public class MainActivity_Register_page extends AppCompatActivity {
                                 back_login.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-//                                        Intent login_intent = new Intent(MainActivity_Register_page.this)
-//                                        startActivity(login_intent);
+                                        Intent login_intent = new Intent(MainActivity_Register_page.this,MainActivity_Login_page.class);
+                                        startActivity(login_intent);
                                     }
                                 });
                                 back_login.setNegativeButton("NO", new DialogInterface.OnClickListener() {
