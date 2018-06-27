@@ -40,51 +40,21 @@ import static android.hardware.SensorManager.DATA_X;
 public class MainActivity_game_page extends AppCompatActivity {
 
     MyView mAnimView = null;
-    private int game_choose = 0 ;
-    private static String str = "choose_game";
-    public ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_gamepage);
-//        constraintLayout = (ConstraintLayout) findViewById(R.id.root1);
 
         mAnimView = new MyView(this);
         setContentView(mAnimView);
-
-//        mAnimView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                mAnimView.mPosX = event.getX();
-//                mAnimView.mPosY = event.getY();
-//                mAnimView.invalidate();
-//                return true;
-//            }
-//        });
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//
-//
-//    }
-
-    public static Intent newIntent(MainActivity_Choose_game_page mainActivity_choose_game_page, int game_choose) {
-        Intent intent = new Intent(mainActivity_choose_game_page,MainActivity_game_page.class);
-        intent.putExtra(str,game_choose);
-        return intent;
-    }
-
-
 
     public class MyView extends SurfaceView implements SurfaceHolder.Callback,Runnable,SensorEventListener{
 
-        int Soced = 0;
-        int Lightning = 0 ;
-        int Boom = 0 ;
-        int n = 0;
+        int Soced = 20;
+        int Lightning = 20 ;
+        int Boom = 20 ;
 
         /*游戏画笔*/
         Paint mPaint;
@@ -108,43 +78,42 @@ public class MainActivity_game_page extends AppCompatActivity {
         private int mScreenBallWidth = 0;
         private int mScreenBallHeight = 0;
 
-        /*小球撞墙的区域*/
-        private int mWallWidth = 0;
-        private int mWallHeight = 0;
-
         /*小球资源文件*/
         private Bitmap mbitmapBall;
+
+        /*结束资源文件*/
+        private Bitmap mbitmapEnd;
 
         /*背景图片资源文件*/
         private Bitmap mbitmapBg;
 
-//        /*闪电速度资源*/
-//        private Bitmap mbitmapLightning;
-//
-//        /*速度值*/
-//        float a = 2;
-//
-//        /*分数资源图片*/
-//        private Bitmap mbitmapSoced;
-//
-//        /*地雷资源图片*/
-//        private Bitmap mbitmapBoom;
+        /*闪电速度资源*/
+        private Bitmap mbitmapLightning;
+
+        /*速度值*/
+        float a = 1;
+
+        /*分数资源图片*/
+        private Bitmap mbitmapSoced;
+
+        /*地雷资源图片*/
+        private Bitmap mbitmapBoom;
 
         /*wall资源图片*/
         private Bitmap mbitmapWall;
 
         /*小球的坐标位置*/
-        public float mPosX = 200;
-        public float mPosY = 200;
+        public float mPosX = 80;
+        public float mPosY = 100;
 
-//        /*分数数组*/
-//        ArrayList<Score_coordinate> score_coordinates = new ArrayList<>();
-//
-//        /*闪电数组*/
-//        ArrayList<Lightning_coordinate> lightning_coordinates = new ArrayList<>();
-//
-//        /*地雷数组*/
-//        ArrayList<Boom_coordinate> boom_coordinates = new ArrayList<>();
+        /*分数数组*/
+        ArrayList<Score_coordinate> score_coordinates = new ArrayList<>();
+
+        /*闪电数组*/
+        ArrayList<Lightning_coordinate> lightning_coordinates = new ArrayList<>();
+
+        /*地雷数组*/
+        ArrayList<Boom_coordinate> boom_coordinates = new ArrayList<>();
 
         /*Wall数组*/
         ArrayList<Wall_coordinate> wall_coordinates = new ArrayList<>();
@@ -153,10 +122,16 @@ public class MainActivity_game_page extends AppCompatActivity {
         Random random = new Random();
 
         /*坐标可误差值*/
-        private float mK= 50;
+        private float mK= 48;
 
         /*游戏得分*/
-//        int game_Score = 0;
+        int game_Score = 0;
+
+        /*游戏速度值*/
+        int game_Linght = 1;
+
+        /*游戏地雷个数*/
+        int game_Boom = 1;
 
         /*重力感应X轴 Y轴 Z轴的重力值*/
         private float mGX = 0;
@@ -193,76 +168,19 @@ public class MainActivity_game_page extends AppCompatActivity {
             mbitmapBg = BitmapFactory.decodeResource(this.getResources(),R.drawable.bg);
             /*加载wall资源*/
             mbitmapWall = BitmapFactory.decodeResource(this.getResources(),R.drawable.wall);
-//            /*加载地雷资源*/
-//            mbitmapBoom = BitmapFactory.decodeResource(this.getResources(),R.drawable.boom);
-//            /*闪电速度资源*/
-//            mbitmapLightning = BitmapFactory.decodeResource(this.getResources(),R.drawable.lightning);
-//            /*加载分数随机资源*/
-//            mbitmapSoced = BitmapFactory.decodeResource(this.getResources(),R.drawable.scored);
+            /*加载地雷资源*/
+            mbitmapBoom = BitmapFactory.decodeResource(this.getResources(),R.drawable.boom);
+            /*闪电速度资源*/
+            mbitmapLightning = BitmapFactory.decodeResource(this.getResources(),R.drawable.lightning);
+            /*加载分数随机资源*/
+            mbitmapSoced = BitmapFactory.decodeResource(this.getResources(),R.drawable.scored);
+            /*加载目标结束*/
+            mbitmapEnd = BitmapFactory.decodeResource(this.getResources(),R.drawable.end);
 
-            game_choose = getIntent().getIntExtra(str,game_choose);
-            if (game_choose == 1){
-                Soced = 10;
-                Lightning = 10 ;
-                Boom = 10 ;
-            }
-            else if (game_choose == 2){
-                Soced = 10 ;
-                Lightning = 10 ;
-                Boom = 10 ;
-            }
-            else {
-                Soced = 10;
-                Lightning = 10 ;
-                Boom = 10 ;
-            }
-
-//            /*添加分数*/
-//            for(int i = 0 ; i < Soced ; i++){
-//                Score_coordinate score_coordinate =new Score_coordinate();
-//                score_coordinate.setmSX(random.nextInt(2000)%(2000-5+1) + 5);
-//                score_coordinate.setmSY(random.nextInt(1000)%(1000-5+1) + 5);
-//                score_coordinates.add(score_coordinate);
-//            }
-//
-//            /*添加闪电*/
-//            for (int j = 0 ; j < Lightning ; j++){
-//                Lightning_coordinate lightning_coordinate = new Lightning_coordinate();
-//                lightning_coordinate.setmLX(random.nextInt(2000)%(2000-5+1) + 5);
-//                lightning_coordinate.setmLY(random.nextInt(1000)%(1000-5+1) + 5);
-//                lightning_coordinates.add(lightning_coordinate);
-//            }
-//
-//            /*添加地雷*/
-//            for (int k = 0 ; k < Boom ; k++){
-//                Boom_coordinate boom_coordinate = new Boom_coordinate();
-//                boom_coordinate.setmBX(random.nextInt(2000)%(2000-5+1) + 5);
-//                boom_coordinate.setmBY(random.nextInt(2000)%(2000-5+1) + 5);
-//                boom_coordinates.add(boom_coordinate);
-//            }
-
-            /*得到SensorManage对象*/
-            mSensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
-            /*加速度传感器*/
-            mSensor = mSensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            /*listener 的灵敏度 SENSOR_DELAY_GAME 游戏中的速度*/
-            mSensorMgr.registerListener(this,mSensor,SensorManager.SENSOR_DELAY_UI);
-
+            /*迷宫*/
             mazes.traversal();
             mazes.create();
             mazes.findPath();
-
-
-        }
-
-        private void Draw(){
-
-            /*得到当前屏幕宽高*/
-            mScreenWidth = this.getWidth();
-            mScreenHeight = this.getHeight();
-            /*背景*/
-            mCanvas.drawBitmap(mbitmapBg,0,0,mPaint);
-
             /*绘制地图*/
             for (int i = 0 ; i < 2*height+1 ; i++){
                 for (int j = 0 ; j < 2*width+1 ; j++){
@@ -277,268 +195,413 @@ public class MainActivity_game_page extends AppCompatActivity {
                 }
             }
             mazes.reset();
-//
-//            /*描绘地雷*/
-//            for (int k = 0 ; k < Boom ; k++){
-//                mCanvas.drawBitmap(mbitmapBoom,boom_coordinates.get(k).getmBX(),
-//                        boom_coordinates.get(k).getmBY(),
-//                        mPaint);
-//            }
-//
-//            /*描绘分数*/
-//            for (int i = 0 ; i < Soced ; i++){
-//                mCanvas.drawBitmap(mbitmapSoced,
-//                        score_coordinates.get(i).getmSX(),
-//                        score_coordinates.get(i).getmSY(),
-//                        mPaint);
-//            }
-//
-//            /*绘制闪电*/
-//            for (int j = 0 ; j < Lightning ; j++){
-//                mCanvas.drawBitmap(mbitmapLightning,
-//                        lightning_coordinates.get(j).getmLX(),
-//                        lightning_coordinates.get(j).getmLY(),
-//                        mPaint);
-//            }
 
-            /*小球*/
-            mCanvas.drawBitmap(mbitmapBall,mPosX,mPosY,mPaint);
-//            mCanvas.drawCircle(mPosX,mPosY,15,mPaint);
-//
-//            /*小球误差范围内加速度*/
-//            for (int j = 0 ; j < Lightning ; j++){
-//                if (Math.abs((mPosX+30)-lightning_coordinates.get(j).getmLX())<=mK){
-//                    if (Math.abs((mPosY+40)-lightning_coordinates.get(j).getmLY())<=mK){
-//                        lightning_coordinates.get(j).setmLX(random.nextInt(mScreenWidth)%(mScreenWidth-5+1) + 5);
-//                        lightning_coordinates.get(j).setmLY(random.nextInt(mScreenHeight)%(mScreenHeight-5+1) + 5);
-//                        a= (float) (a+0.3);
-//                        if (j%2 == 0){
-//                            boom_coordinates.get(j).setmBX(random.nextInt(mScreenWidth)%(mScreenWidth-5+1) + 5);
-//                            boom_coordinates.get(j).setmBY(random.nextInt(mScreenWidth)%(mScreenWidth-5+1) + 5);
-//                            score_coordinates.get(j).setmSX(random.nextInt(mScreenWidth)%(mScreenWidth-5+1) + 5);
-//                            score_coordinates.get(j).setmSY(random.nextInt(mScreenHeight)%(mScreenHeight-5+1) + 5);
-//                        }
-//
-//                    }
-//                }
-//            }
-////
-//            /*小球误差值内加分*/
-//            for (int i = 0 ; i<Soced ; i++){
-//                if (Math.abs((mPosX+30)-score_coordinates.get(i).getmSX())<=mK){
-//                    if (Math.abs((mPosY+40)-score_coordinates.get(i).getmSY())<=mK){
-//                        score_coordinates.get(i).setmSX(random.nextInt(mScreenWidth)%(mScreenWidth-5+1) + 5);
-//                        score_coordinates.get(i).setmSY(random.nextInt(mScreenHeight)%(mScreenHeight-5+1) + 5);
-//                        game_Score++;
-//                    }
-//                }
-//            }
-
-            /*是否碰到wall*/
-            if (mPosX < mScreenHeight*0.3){
-                for (int i = 0 ; i < wall_coordinates.size()*0.3 ; i ++){
-                    if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
-                        if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-                            mIsRunning = false;
-                        }
-                        else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-                            mIsRunning = false;
-                        }
-                    }
-                    if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
-                        if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-                            mIsRunning = false;
-                        }
-                        else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-                            mIsRunning = false;
+            /*添加分数*/
+            for(int i = 0 ; i < Soced ; i++){
+                Score_coordinate score_coordinate =new Score_coordinate();
+                score_coordinate.setmSX(random.nextInt(1500)%(1500-5+1) + 5);
+                score_coordinate.setmSY(random.nextInt(1000)%(1000-5+1) + 5);
+                if (score_coordinate.getmSX()< mScreenWidth*0.3){
+                    for (int j = 0 ; j < wall_coordinates.size()*0.3 ; j ++){
+                        if(Math.abs(score_coordinate.getmSX() - wall_coordinates.get(j).getmWX())<50 && Math.abs(score_coordinate.getmSY() - wall_coordinates.get(j).getmWY())<50){
+                            score_coordinate.setmSX(wall_coordinates.get(j).getmWX());
+                            score_coordinate.setmSY(wall_coordinates.get(j).getmWY());
                         }
                     }
                 }
-            }else if (mPosX >= mScreenHeight*0.3 && mPosX < mScreenHeight*0.6){
-                for (int i = (int) (wall_coordinates.size()*0.3); i < wall_coordinates.size()*0.6 ; i ++){
-                    if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
-                        if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-                            mIsRunning = false;
-                        }
-                        else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-                            mIsRunning = false;
+                else if (score_coordinate.getmSX()>= mScreenWidth*0.3 && score_coordinate.getmSX()< mScreenWidth*0.6){
+                    for (int j = (int) (mScreenWidth*0.3); j < wall_coordinates.size()*0.3 ; j ++){
+                        if(Math.abs(score_coordinate.getmSX() - wall_coordinates.get(j).getmWX())<50 && Math.abs(score_coordinate.getmSY() - wall_coordinates.get(j).getmWY())<50){
+                            score_coordinate.setmSX(wall_coordinates.get(j).getmWX());
+                            score_coordinate.setmSY(wall_coordinates.get(j).getmWY());
                         }
                     }
-                    if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
+                }else {
+                    for (int j = (int) (mScreenWidth*0.6); j < wall_coordinates.size() ; j ++){
+                        if(Math.abs(score_coordinate.getmSX() - wall_coordinates.get(j).getmWX())<50 && Math.abs(score_coordinate.getmSY() - wall_coordinates.get(j).getmWY())<50){
+                            score_coordinate.setmSX(wall_coordinates.get(j).getmWX());
+                            score_coordinate.setmSY(wall_coordinates.get(j).getmWY());
+                        }
+                    }
+                }
+                score_coordinates.add(score_coordinate);
+            }
+
+            /*添加闪电*/
+            for (int i = 0 ; i < Lightning ; i++){
+                Lightning_coordinate lightning_coordinate = new Lightning_coordinate();
+                lightning_coordinate.setmLX(random.nextInt(1500)%(1500-5+1) + 5);
+                lightning_coordinate.setmLY(random.nextInt(1000)%(1000-5+1) + 5);
+                if (lightning_coordinate.getmLX()< mScreenWidth*0.3){
+                    for (int j = 0 ; j < wall_coordinates.size()*0.3 ; j ++){
+                        if (Math.abs(lightning_coordinate.getmLX() - wall_coordinates.get(j).getmWX())<50 && Math.abs(lightning_coordinate.getmLY() - wall_coordinates.get(j).getmWY())<50){
+                            lightning_coordinate.setmLX(wall_coordinates.get(j).getmWX());
+                            lightning_coordinate.setmLY(wall_coordinates.get(j).getmWY());
+                        }
+                    }
+                }
+                else if (lightning_coordinate.getmLX()>= mScreenWidth*0.3 && lightning_coordinate.getmLX()< mScreenWidth*0.6){
+                    for (int j = (int) (mScreenWidth*0.3); j < wall_coordinates.size()*0.3 ; j ++){
+                        if (Math.abs(lightning_coordinate.getmLX() - wall_coordinates.get(j).getmWX())<50 && Math.abs(lightning_coordinate.getmLY() - wall_coordinates.get(j).getmWY())<50){
+                            lightning_coordinate.setmLX(wall_coordinates.get(j).getmWX());
+                            lightning_coordinate.setmLY(wall_coordinates.get(j).getmWY());
+                        }
+                    }
+                }else {
+                    for (int j = (int) (mScreenWidth*0.6); j < wall_coordinates.size() ; j ++){
+                        if (Math.abs(lightning_coordinate.getmLX() - wall_coordinates.get(j).getmWX())<50 && Math.abs(lightning_coordinate.getmLY() - wall_coordinates.get(j).getmWY())<50){
+                            lightning_coordinate.setmLX(wall_coordinates.get(j).getmWX());
+                            lightning_coordinate.setmLY(wall_coordinates.get(j).getmWY());
+                        }
+                    }
+                }
+                lightning_coordinates.add(lightning_coordinate);
+            }
+
+            /*添加地雷*/
+            for (int k = 0 ; k < Boom ; k++){
+                Boom_coordinate boom_coordinate = new Boom_coordinate();
+                boom_coordinate.setmBX(random.nextInt(1500)%(1500-5+1) + 5);
+                boom_coordinate.setmBY(random.nextInt(1000)%(1000-5+1) + 5);
+                if (boom_coordinate.getmBX()< mScreenWidth*0.3){
+                    for (int j = 0 ; j < wall_coordinates.size()*0.3 ; j ++) {
+                        if (Math.abs(boom_coordinate.getmBX() - wall_coordinates.get(j).getmWX()) <50 && Math.abs(boom_coordinate.getmBY() - wall_coordinates.get(j).getmWY()) <50){
+                            boom_coordinate.setmBX(wall_coordinates.get(j).getmWX());
+                            boom_coordinate.setmBY(wall_coordinates.get(j).getmWY());
+                        }
+                    }
+                }
+                else if (boom_coordinate.getmBX()>= mScreenWidth*0.3 && boom_coordinate.getmBX()< mScreenWidth*0.6){
+                    for (int j = (int) (mScreenWidth*0.3); j < wall_coordinates.size()*0.3 ; j ++){
+                        if(Math.abs(boom_coordinate.getmBX() - wall_coordinates.get(j).getmWX()) <50 && Math.abs(boom_coordinate.getmBY() - wall_coordinates.get(j).getmWY()) <50) {
+                            boom_coordinate.setmBX(wall_coordinates.get(j).getmWX());
+                            boom_coordinate.setmBY(wall_coordinates.get(j).getmWY());
+                        }
+                    }
+                }else {
+                    for (int j = (int) (mScreenWidth*0.6); j < wall_coordinates.size() ; j ++){
+                        if (Math.abs(boom_coordinate.getmBX() - wall_coordinates.get(j).getmWX()) <50 && Math.abs(boom_coordinate.getmBY() - wall_coordinates.get(j).getmWY()) <50){
+                            boom_coordinate.setmBX(wall_coordinates.get(j).getmWX());
+                            boom_coordinate.setmBY(wall_coordinates.get(j).getmWY());
+                        }
+                    }
+                }
+                boom_coordinates.add(boom_coordinate);
+
+            }
+
+            /*得到SensorManage对象*/
+            mSensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
+            /*加速度传感器*/
+            mSensor = mSensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            /*listener 的灵敏度 SENSOR_DELAY_GAME 游戏中的速度*/
+            mSensorMgr.registerListener(this,mSensor,SensorManager.SENSOR_DELAY_UI);
+
+
+
+
+        }
+
+        private void Draw(){
+
+            /*得到当前屏幕宽高*/
+            mScreenWidth = this.getWidth();
+            mScreenHeight = this.getHeight();
+            /*背景*/
+            mCanvas.drawBitmap(mbitmapBg,0,0,mPaint);
+
+            /*描绘地雷*/
+            for (int k = 0 ; k < Boom ; k++){
+                mCanvas.drawBitmap(mbitmapBoom,
+                        boom_coordinates.get(k).getmBX(),
+                        boom_coordinates.get(k).getmBY(),
+                        mPaint);
+            }
+
+            /*描绘分数*/
+            for (int i = 0 ; i < Soced ; i++){
+                mCanvas.drawBitmap(mbitmapSoced,
+                        score_coordinates.get(i).getmSX(),
+                        score_coordinates.get(i).getmSY(),
+                        mPaint);
+            }
+
+            /*绘制闪电*/
+            for (int j = 0 ; j < Lightning ; j++){
+                mCanvas.drawBitmap(mbitmapLightning,
+                        lightning_coordinates.get(j).getmLX(),
+                        lightning_coordinates.get(j).getmLY(),
+                        mPaint);
+            }
+
+            /*绘制地图*/
+            for (int i = 0 ; i < wall_coordinates.size(); i++){
+                mCanvas.drawBitmap(mbitmapWall,wall_coordinates.get(i).getmWX(),wall_coordinates.get(i).getmWY(),mPaint);
+            }
+
+            /*结束*/
+            mCanvas.drawBitmap(mbitmapEnd,1190,620,mPaint);
+
+            /*小球*/
+            mCanvas.drawBitmap(mbitmapBall,mPosX,mPosY,mPaint);
+
+            /*小球误差范围内加速度*/
+            for (int j = 0 ; j < Lightning ; j++){
+                if (mPosX-lightning_coordinates.get(j).getmLX()<=mK && mPosX > lightning_coordinates.get(j).getmLX()){
+
+                    if (mPosY-lightning_coordinates.get(j).getmLY()<=mK && mPosY > lightning_coordinates.get(j).getmLY()){
+                        lightning_coordinates.get(j).setmLX(2000);
+                        lightning_coordinates.get(j).setmLY(1000);
+                        a= (float) (a+0.3);
+                        game_Linght++;
+
+                    }
+                    if (lightning_coordinates.get(j).getmLY()-mPosY<=mK && mPosY < lightning_coordinates.get(j).getmLY()){
+                        lightning_coordinates.get(j).setmLX(2000);
+                        lightning_coordinates.get(j).setmLY(1000);
+                        a= (float) (a+0.3);
+                        game_Linght++;
+                    }
+                }
+                if (lightning_coordinates.get(j).getmLX()-mPosX<=mK && mPosX < lightning_coordinates.get(j).getmLX()){
+
+                    if (mPosY-lightning_coordinates.get(j).getmLY()<=mK && mPosY > lightning_coordinates.get(j).getmLY()){
+                        lightning_coordinates.get(j).setmLX(2000);
+                        lightning_coordinates.get(j).setmLY(1000);
+                        a= (float) (a+0.3);
+                        game_Linght++;
+
+                    }
+                    else if (lightning_coordinates.get(j).getmLY()-mPosY<=mK && mPosY < lightning_coordinates.get(j).getmLY()){
+                        lightning_coordinates.get(j).setmLX(2000);
+                        lightning_coordinates.get(j).setmLY(1000);
+                        a= (float) (a+0.3);
+                        game_Linght++;
+                    }
+                }
+            }
+
+            /*小球误差值内加分*/
+            for (int i = 0 ; i<Soced ; i++){
+                if (mPosX-score_coordinates.get(i).getmSX()<=mK && mPosX > score_coordinates.get(i).getmSX()){
+
+                    if (mPosY-score_coordinates.get(i).getmSY()<=mK && mPosY > score_coordinates.get(i).getmSY()){
+                        score_coordinates.get(i).setmSX(2000);
+                        score_coordinates.get(i).setmSY(1000);
+                        game_Score++;
+                    }
+                    else if (score_coordinates.get(i).getmSY()-mPosY<=mK && mPosY < score_coordinates.get(i).getmSY()){
+                        score_coordinates.get(i).setmSX(2000);
+                        score_coordinates.get(i).setmSY(1000);
+                        game_Score++;
+                    }
+                }
+                else if (score_coordinates.get(i).getmSX()-mPosX<=mK && mPosX < score_coordinates.get(i).getmSX()){
+
+                    if (mPosY-score_coordinates.get(i).getmSY()<=mK && mPosY > score_coordinates.get(i).getmSY()){
+                        score_coordinates.get(i).setmSX(2000);
+                        score_coordinates.get(i).setmSY(1000);
+                        game_Score++;
+                    }
+                    else if (score_coordinates.get(i).getmSY()-mPosY<=mK && mPosY < score_coordinates.get(i).getmSY()){
+                        score_coordinates.get(i).setmSX(2000);
+                        score_coordinates.get(i).setmSY(1000);
+                        game_Score++;
+                    }
+                }
+            }
+
+            /*小球误差值内加地雷*/
+            for (int i = 0 ; i<Boom ; i++){
+                if (mPosX-boom_coordinates.get(i).getmBX()<=mK && mPosX > boom_coordinates.get(i).getmBX()){
+
+                    if (mPosY-boom_coordinates.get(i).getmBY()<=mK && mPosY > boom_coordinates.get(i).getmBY()){
+                        boom_coordinates.get(i).setmBX(2000);
+                        boom_coordinates.get(i).setmBY(1000);
+                        game_Boom++;
+                    }
+                    else if (boom_coordinates.get(i).getmBY()-mPosY<=mK && mPosY < boom_coordinates.get(i).getmBY()){
+                        boom_coordinates.get(i).setmBX(2000);
+                        boom_coordinates.get(i).setmBY(1000);
+                        game_Boom++;
+                    }
+                }
+                else if (boom_coordinates.get(i).getmBX()-mPosX<=mK && mPosX < boom_coordinates.get(i).getmBX()){
+
+                    if (mPosY-boom_coordinates.get(i).getmBY()<=mK && mPosY > boom_coordinates.get(i).getmBY()){
+                        boom_coordinates.get(i).setmBX(2000);
+                        boom_coordinates.get(i).setmBY(1000);
+                        game_Boom++;
+                    }
+                    else if (boom_coordinates.get(i).getmBY()-mPosY<=mK && mPosY < boom_coordinates.get(i).getmBY()){
+                        boom_coordinates.get(i).setmBX(2000);
+                        boom_coordinates.get(i).setmBY(1000);
+                        game_Boom++;
+                    }
+                }
+            }
+
+
+            /*是否碰到wall*/
+            if (mPosX < (int)(mScreenWidth*0.3)){
+                for (int i = 0 ; i < (int)(wall_coordinates.size()*0.3) ; i++){
+
+                    if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
+
+                        if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                mIsRunning = false;
+                            }
+
+                        }
+                        else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                mIsRunning = false;
+                            }
+                        }
+                    }
+                    else if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
+
                         if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-                            mIsRunning = false;
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                mIsRunning = false;
+                            }
                         }
                         else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-                            mIsRunning = false;
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                mIsRunning = false;
+                            }
+                        }
+                    }
+                }
+            }else if (mPosX >=(int)( mScreenWidth*0.3) && mPosX < (int)(mScreenWidth*0.6)){
+                for (int i = (int) (wall_coordinates.size()*0.3); i < (int)(wall_coordinates.size()*0.6) ; i ++){
+
+                    if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
+
+                        if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                mIsRunning = false;
+                            }
+                        }
+                        else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                mIsRunning = false;
+                            }
+                        }
+                    }
+                    else if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
+
+                        if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                mIsRunning = false;
+                            }
+                        }
+                        else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                mIsRunning = false;
+                            }
                         }
                     }
                 }
             }else {
                 for (int i = (int) (wall_coordinates.size()*0.6); i < wall_coordinates.size() ; i ++){
+
                     if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
+
                         if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-                            mIsRunning = false;
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                mIsRunning = false;
+                            }
                         }
                         else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-                            mIsRunning = false;
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                mIsRunning = false;
+                            }
                         }
                     }
-                    if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
+                    else if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
+
                         if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-                            mIsRunning = false;
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                mIsRunning = false;
+                            }
                         }
                         else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-                            mIsRunning = false;
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                mIsRunning = false;
+                            }
                         }
                     }
                 }
             }
-//            if (mPosX < mScreenHeight*0.3){
-//                for (int i = 0 ; i < wall_coordinates.size()*0.3 ; i ++){
-//                    if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
-//                        if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-//                            mPosX = wall_coordinates.get(i).getmWX()+50;
-//                        }
-//                        else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-//                            mPosX = wall_coordinates.get(i).getmWX()+50;
-//                        }
-//                    }
-//                    if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
-//                        if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-//                            mPosX = wall_coordinates.get(i).getmWX()-50;
-//                        }
-//                        else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-//                            mPosX = wall_coordinates.get(i).getmWX()-50;
-//                        }
-//                    }
-//                }
-//                for (int j = 0 ; j < wall_coordinates.size()*0.3 ; j ++){
-//                    if (mPosY - wall_coordinates.get(j).getmWY() <= 50 && mPosY>wall_coordinates.get(j).getmWY()){
-//                        if (mPosX - wall_coordinates.get(j).getmWX() <= 50 && mPosX>wall_coordinates.get(j).getmWX()){
-//                            mPosY = wall_coordinates.get(j).getmWY()+50;
-//                        }
-//                        else if (wall_coordinates.get(j).getmWX() - mPosX <=50 && mPosX<wall_coordinates.get(j).getmWX()){
-//                            mPosY = wall_coordinates.get(j).getmWY()+50;
-//                        }
-//                    }
-//                    if (wall_coordinates.get(j).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(j).getmWY()){
-//                        if (mPosX - wall_coordinates.get(j).getmWX() <= 50 && mPosX>wall_coordinates.get(j).getmWX()){
-//                            mPosY = wall_coordinates.get(j).getmWY()-50;
-//                        }
-//                        else if (wall_coordinates.get(j).getmWX() - mPosX <=50 && mPosX<wall_coordinates.get(j).getmWX()){
-//                            mPosY = wall_coordinates.get(j).getmWY()-50;
-//                        }
-//                    }
-//                }
-//
-//            }else if(mPosX >= mScreenHeight*0.3 && mPosX < mScreenHeight*0.6) {
-//                for (int i = (int) (wall_coordinates.size()*0.3); i < wall_coordinates.size()*0.6 ; i ++){
-//
-//                    if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
-//                        if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-//                            mPosX = wall_coordinates.get(i).getmWX()+50;
-//                        }
-//                        else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-//                            mPosX = wall_coordinates.get(i).getmWX()+50;
-//                        }
-//                    }
-//                    if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
-//                        if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-//                            mPosX = wall_coordinates.get(i).getmWX()-50;
-//                        }
-//                        else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-//                            mPosX = wall_coordinates.get(i).getmWX()-50;
-//                        }
-//                    }
-//                }
-//
-//                for (int j = (int) (wall_coordinates.size()*0.3) ; j < wall_coordinates.size()*0.6 ; j ++){
-//                    if (mPosY - wall_coordinates.get(j).getmWY() <= 50 && mPosY>wall_coordinates.get(j).getmWY()){
-//                        if (mPosX - wall_coordinates.get(j).getmWX() <= 50 && mPosX>wall_coordinates.get(j).getmWX()){
-//                            mPosY = wall_coordinates.get(j).getmWY()+50;
-//                        }
-//                        else if (wall_coordinates.get(j).getmWX() - mPosX <=50 && mPosX<wall_coordinates.get(j).getmWX()){
-//                            mPosY = wall_coordinates.get(j).getmWY()+50;
-//                        }
-//                    }
-//                    if (wall_coordinates.get(j).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(j).getmWY()){
-//                        if (mPosX - wall_coordinates.get(j).getmWX() <= 50 && mPosX>wall_coordinates.get(j).getmWX()){
-//                            mPosY = wall_coordinates.get(j).getmWY()-50;
-//                        }
-//                        else if (wall_coordinates.get(j).getmWX() - mPosX <=50 && mPosX<wall_coordinates.get(j).getmWX()){
-//                            mPosY = wall_coordinates.get(j).getmWY()-50;
-//                        }
-//                    }
-//                }
-//            }else {
-//                for (int i = (int) (wall_coordinates.size()*0.6); i < wall_coordinates.size() ; i ++){
-//
-//                    if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
-//                        if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-//                            mPosX = wall_coordinates.get(i).getmWX()+50;
-//                        }
-//                        else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-//                            mPosX = wall_coordinates.get(i).getmWX()+50;
-//                        }
-//                    }
-//                    if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
-//                        if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-//
-//                            mPosX = wall_coordinates.get(i).getmWX()-50;
-//                        }
-//                        else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-//                            mPosX = wall_coordinates.get(i).getmWX()-50;
-//                        }
-//                    }
-//                }
-//                for (int j = (int) (wall_coordinates.size()*0.6) ; j < wall_coordinates.size() ; j ++){
-//                    if (mPosY - wall_coordinates.get(j).getmWY() <= 50 && mPosY>wall_coordinates.get(j).getmWY()){
-//                        if (mPosX - wall_coordinates.get(j).getmWX() <= 50 && mPosX>wall_coordinates.get(j).getmWX()){
-//                            mPosY = wall_coordinates.get(j).getmWY()+50;
-//                        }
-//                        else if (wall_coordinates.get(j).getmWX() - mPosX <=50 && mPosX<wall_coordinates.get(j).getmWX()){
-//                            mPosY = wall_coordinates.get(j).getmWY()+50;
-//                        }
-//                    }
-//                    if (wall_coordinates.get(j).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(j).getmWY()){
-//                        if (mPosX - wall_coordinates.get(j).getmWX() <= 50 && mPosX>wall_coordinates.get(j).getmWX()){
-//                            mPosY = wall_coordinates.get(j).getmWY()-50;
-//                        }
-//                        else if (wall_coordinates.get(j).getmWX() - mPosX <=50 && mPosX<wall_coordinates.get(j).getmWX()){
-//                            mPosY = wall_coordinates.get(j).getmWY()-50;
-//                        }
-//                    }
-//                }
-//
-//            }
 
-
-//            for (int i = 0 ; i < wall_coordinates.size() ; i ++){
-//                if (mPosX - wall_coordinates.get(i).getmWX() <= 35 && mPosX>wall_coordinates.get(i).getmWX()){
-//                    if (mPosY - wall_coordinates.get(i).getmWY() <= 35 && mPosY>wall_coordinates.get(i).getmWY()){
-//                        mPosX = wall_coordinates.get(i).getmWX()+35;
-//                    }
-//                    else if (wall_coordinates.get(i).getmWY() - mPosY <= 30 && mPosY<wall_coordinates.get(i).getmWY()){
-//                        mPosX = wall_coordinates.get(i).getmWX()+35;
-//                    }
-//                }
-//                if (wall_coordinates.get(i).getmWX() - mPosX <= 30 && mPosX<wall_coordinates.get(i).getmWX()){
-//                    if (wall_coordinates.get(i).getmWY() - mPosY <= 30 && mPosY<wall_coordinates.get(i).getmWY()){
-//                        mPosX = wall_coordinates.get(i).getmWX()-30;
-//                    }
-//                    else if (mPosY - wall_coordinates.get(i).getmWY() <= 35 && mPosY>wall_coordinates.get(i).getmWY()){
-//                        mPosX = wall_coordinates.get(i).getmWX()-30;
-//                    }
-//                }
-//            }
+            /*小球游戏完成*/
+            if (Math.abs((mPosX+40)-1190)<=25 && Math.abs((mPosY+40)-620)<=25){
+                mCanvas.drawText("游戏完成！！！",500,200,mPaint);
+                //TODO
+            }
 
             /*小球游戏结束*/
             if (mIsRunning == false){
                 mCanvas.drawText("游戏结束！！！",500,200,mPaint);
-
             }
 
-//            mCanvas.drawText("分数"+game_Score,20,50,mPaint);
+            mCanvas.drawText("分数"+game_Score,20,50,mPaint);
+            mCanvas.drawText("雷数"+game_Boom,220,50,mPaint);
+            if (game_Linght<=10){
+                mCanvas.drawText("速度"+game_Linght,420,50,mPaint);
+            }else {
+                mCanvas.drawText("速度"+"MAX",420,50,mPaint);
+            }
         }
 
         @Override
@@ -576,36 +639,6 @@ public class MainActivity_game_page extends AppCompatActivity {
                     /*绘制完成后解锁显示*/
                     mSurfaceHolder.unlockCanvasAndPost(mCanvas);
                 }
-
-//                /*小球吃闪电*/
-//                for (int j = 0 ; j < Lightning ; j++){
-//                    if (Math.abs((mPosX+30)-lightning_coordinates.get(j).getmLX())<=mK){
-//                        if (Math.abs((mPosY+40)-lightning_coordinates.get(j).getmLY())<=mK){
-//                            Draw();
-//                        }
-//                    }
-//                }
-//
-//                /*小球得分*/
-//                for (int i = 0 ; i<Soced ; i++){
-//                    if (Math.abs((mPosX+30)-score_coordinates.get(i).getmSX())<=mK){
-//                        if (Math.abs((mPosY+40)-score_coordinates.get(i).getmSY())<=mK){
-//                           Draw();
-//                        }
-//                    }
-//                }
-//
-//                /*小球吃雷*/
-//                for (int k =  0 ; k < Boom ; k++){
-//                    if (Math.abs((mPosX+30)-boom_coordinates.get(k).getmBX())<=mK){
-//                        if (Math.abs((mPosY+40)-boom_coordinates.get(k).getmBY())<=mK){
-//                            surfaceDestroyed(mSurfaceHolder);
-////                            Draw();
-//                        }
-//                    }
-//                }
-
-
             }
 
             if(mIsRunning == false){
@@ -624,8 +657,8 @@ public class MainActivity_game_page extends AppCompatActivity {
             mGZ = event.values[SensorManager.DATA_Z];
 
             /*速度加快*/
-            mPosX-=mGX * 1;
-            mPosY+=mGY * 1;
+            mPosX-=mGX * a;
+            mPosY+=mGY * a;
 
             /*是否超出边界*/
             if (mPosX < 0){

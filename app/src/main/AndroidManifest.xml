@@ -33,10 +33,6 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.Activity_Style" />
         <activity
-            android:name=".rendering.MainActivity_Choose_game_page"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.Activity_Style" />
-        <activity
             android:name=".rendering.MainActivity_game_setting_page"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.Activity_Style" />
