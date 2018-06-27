@@ -80,7 +80,6 @@ public class MainActivity_personal_information extends AppCompatActivity {
         mUser_imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity_personal_information.this,"选择图片",Toast.LENGTH_SHORT).show();
 
                 new AlertDialog.Builder(MainActivity_personal_information.this).setTitle("选择获取图片方式").setItems(items, new DialogInterface.OnClickListener() {
                     @Override
@@ -140,7 +139,8 @@ public class MainActivity_personal_information extends AppCompatActivity {
                 exit.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Intent intent = new Intent(MainActivity_personal_information.this,MainActivity_main_page.class);
+                        startActivity(intent);
                     }
                 });
                 exit.show();
