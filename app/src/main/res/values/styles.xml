@@ -17,7 +17,7 @@
     <style name="AppTheme.Activity_Style">
         <item name="android:windowBackground">@android:color/transparent</item> //窗口背景色
         <item name="android:windowFrame">@null</item> //windowFrame框无
-        <item name="android:windowNoTitle">true</item>  //去除标题栏
+        <item name="windowNoTitle">true</item>  //去除标题栏
         <item name="android:windowIsFloating">true</item>  //浮现在activity之上
         <item name="android:windowIsTranslucent">true</item>  //窗口半透明
         <item name="android:windowContentOverlay">@null</item>  //消除边框黑线
