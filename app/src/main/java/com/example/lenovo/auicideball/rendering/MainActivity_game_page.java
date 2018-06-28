@@ -588,13 +588,13 @@ public class  MainActivity_game_page extends AppCompatActivity {
                 }
             }
 
-            /*小球游戏完成*/
-            if (Math.abs((mPosX+40)-1190)<=25 && Math.abs((mPosY+40)-620)<=25){
-                mCanvas.drawText("游戏完成！！！",500,200,mPaint);
-
-                Intent intent = new Intent(MainActivity_game_page.this,MainActivity_game_end_page.class);
-                startActivity(intent);
-            }
+//            /*小球游戏完成*/
+//            if (Math.abs((mPosX+40)-1190)<=25 && Math.abs((mPosY+40)-620)<=25){
+//                mCanvas.drawText("游戏完成！！！",500,200,mPaint);
+//
+//                Intent intent = new Intent(MainActivity_game_page.this,MainActivity_game_end_page.class);
+//                startActivity(intent);
+//            }
 
             /*小球游戏结束*/
             if (mIsRunning == false){
