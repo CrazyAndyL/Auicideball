@@ -448,7 +448,7 @@ public class  MainActivity_game_page extends AppCompatActivity {
 
             /*是否碰到wall*/
             if (mPosX < (int)(mScreenWidth*0.3)){
-                for (int i = 0 ; i < (int)(wall_coordinates.size()*0.3) ; i++){
+                for (int i = 0 ; i < (int)(wall_coordinates.size()*0.3)+20 ; i++){
 
                     if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
 
@@ -495,7 +495,7 @@ public class  MainActivity_game_page extends AppCompatActivity {
                     }
                 }
             }else if (mPosX >=(int)( mScreenWidth*0.3) && mPosX < (int)(mScreenWidth*0.6)){
-                for (int i = (int) (wall_coordinates.size()*0.3); i < (int)(wall_coordinates.size()*0.6) ; i ++){
+                for (int i = (int) (wall_coordinates.size()*0.3); i < (int)(wall_coordinates.size()*0.6)+20 ; i ++){
 
                     if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
 

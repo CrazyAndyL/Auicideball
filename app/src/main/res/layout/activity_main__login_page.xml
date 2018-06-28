@@ -6,119 +6,109 @@
     android:layout_height="280dp"
     android:layout_gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/common_part_screen_bg"
+    android:background="@drawable/login_bg"
     tools:context=".rendering.MainActivity_Login_page">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="299dp"
+        android:layout_height="214dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:text="登录界面"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="昵称"
-            android:textSize="15dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline13"
-            app:layout_constraintTop_toTopOf="@+id/guideline14" />
 
         <EditText
             android:id="@+id/user_name_login"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="144dp"
+            android:layout_height="19dp"
+            android:background="@null"
             android:hint="user name"
-            app:layout_constraintStart_toStartOf="@+id/guideline13"
-            app:layout_constraintTop_toTopOf="@+id/guideline14" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="密码"
+            android:textColor="#ffffff"
+            android:textColorHint="#888798"
             android:textSize="15dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline13"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintBottom_toTopOf="@+id/guideline26"
+            app:layout_constraintStart_toStartOf="@+id/guideline25" />
+
 
         <EditText
             android:id="@+id/pass_word_login"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="144dp"
+            android:layout_height="19dp"
+            android:background="@null"
             android:hint="password"
-            app:layout_constraintStart_toStartOf="@+id/guideline13"
-            app:layout_constraintTop_toBottomOf="@+id/user_name_login" />
+            android:textColor="#ffffff"
+            android:textColorHint="#888798"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline27"
+            app:layout_constraintStart_toStartOf="@+id/guideline25" />
 
         <CheckBox
             android:id="@+id/checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="70dp"
-            android:layout_marginRight="70dp"
-            android:layout_marginTop="8dp"
-            android:text="显示密码"
+            android:layout_width="29dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
             android:textSize="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pass_word_login" />
+            app:layout_constraintBottom_toTopOf="@+id/guideline24"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/Login_ok_button"
-            android:layout_width="80dp"
-            android:layout_height="45dp"
-            android:text="登录"
-            android:layout_marginBottom="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_width="78dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/login_button"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline13" />
+            app:layout_constraintEnd_toStartOf="@+id/Register_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline24" />
 
         <Button
             android:id="@+id/Register_button"
-            android:layout_width="80dp"
-            android:layout_height="45dp"
-            android:text="注册"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginStart="50dp"
+            android:layout_width="78dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/register_button"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline13" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline24" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/guideline13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.45" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline14"
+            android:id="@+id/guideline24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_percent="0.71" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.36" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.64" />
+
 
     </android.support.constraint.ConstraintLayout>
 

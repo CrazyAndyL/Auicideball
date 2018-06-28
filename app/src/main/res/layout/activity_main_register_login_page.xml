@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".rendering.MainActivity_register_login_page">
+    tools:context=".rendering.MainActivity_register_login_page"
+    android:background="@drawable/first_open_bg">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
