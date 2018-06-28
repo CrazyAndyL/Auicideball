@@ -60,11 +60,14 @@
         </provider>
 
         <activity android:name=".rendering.MainActivity_game1_page" />
-        <activity
-            android:name=".rendering.MainActivity_Rank_List_page"
+        <activity android:name=".rendering.MainActivity_Rank_List_page"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.Activity_Style"></activity>
-        <activity android:name=".rendering.MainActivity_game_end_page"></activity>
+        <activity android:name=".rendering.MainActivity_game_end_page"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.Activity_Style">
+
+        </activity>
     </application>
 
 </manifest>
