@@ -53,9 +53,9 @@ public class  MainActivity_game_page extends AppCompatActivity {
 
     public class MyView extends SurfaceView implements SurfaceHolder.Callback,Runnable,SensorEventListener{
 
-        int Soced = 20;
-        int Lightning = 20 ;
-        int Boom = 20 ;
+        int Soced = 50;
+        int Lightning = 50 ;
+        int Boom = 50 ;
 
         /*游戏画笔*/
         Paint mPaint;
@@ -445,161 +445,8 @@ public class  MainActivity_game_page extends AppCompatActivity {
                 }
             }
 
-
-            /*是否碰到wall*/
-            if (mPosX < (int)(mScreenWidth*0.3)){
-                for (int i = 0 ; i < (int)(wall_coordinates.size()*0.3)+20 ; i++){
-
-                    if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
-
-                        if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-                            if (game_Boom>0){
-                                wall_coordinates.get(i).setmWX(2000);
-                                wall_coordinates.get(i).setmWY(1000);
-                                game_Boom--;
-                            }else {
-                                mIsRunning = false;
-                            }
-
-                        }
-                        else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-                            if (game_Boom>0){
-                                wall_coordinates.get(i).setmWX(2000);
-                                wall_coordinates.get(i).setmWY(1000);
-                                game_Boom--;
-                            }else {
-                                mIsRunning = false;
-                            }
-                        }
-                    }
-                    else if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
-
-                        if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-                            if (game_Boom>0){
-                                wall_coordinates.get(i).setmWX(2000);
-                                wall_coordinates.get(i).setmWY(1000);
-                                game_Boom--;
-                            }else {
-                                mIsRunning = false;
-                            }
-                        }
-                        else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-                            if (game_Boom>0){
-                                wall_coordinates.get(i).setmWX(2000);
-                                wall_coordinates.get(i).setmWY(1000);
-                                game_Boom--;
-                            }else {
-                                mIsRunning = false;
-                            }
-                        }
-                    }
-                }
-            }else if (mPosX >=(int)( mScreenWidth*0.3) && mPosX < (int)(mScreenWidth*0.6)){
-                for (int i = (int) (wall_coordinates.size()*0.3); i < (int)(wall_coordinates.size()*0.6)+20 ; i ++){
-
-                    if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
-
-                        if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-                            if (game_Boom>0){
-                                wall_coordinates.get(i).setmWX(2000);
-                                wall_coordinates.get(i).setmWY(1000);
-                                game_Boom--;
-                            }else {
-                                mIsRunning = false;
-                            }
-                        }
-                        else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-                            if (game_Boom>0){
-                                wall_coordinates.get(i).setmWX(2000);
-                                wall_coordinates.get(i).setmWY(1000);
-                                game_Boom--;
-                            }else {
-                                mIsRunning = false;
-                            }
-                        }
-                    }
-                    else if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
-
-                        if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-                            if (game_Boom>0){
-                                wall_coordinates.get(i).setmWX(2000);
-                                wall_coordinates.get(i).setmWY(1000);
-                                game_Boom--;
-                            }else {
-                                mIsRunning = false;
-                            }
-                        }
-                        else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-                            if (game_Boom>0){
-                                wall_coordinates.get(i).setmWX(2000);
-                                wall_coordinates.get(i).setmWY(1000);
-                                game_Boom--;
-                            }else {
-                                mIsRunning = false;
-                            }
-                        }
-                    }
-                }
-            }else {
-                for (int i = (int) (wall_coordinates.size()*0.6); i < wall_coordinates.size() ; i ++){
-
-                    if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
-
-                        if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-                            if (game_Boom>0){
-                                wall_coordinates.get(i).setmWX(2000);
-                                wall_coordinates.get(i).setmWY(1000);
-                                game_Boom--;
-                            }else {
-                                mIsRunning = false;
-                            }
-                        }
-                        else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-                            if (game_Boom>0){
-                                wall_coordinates.get(i).setmWX(2000);
-                                wall_coordinates.get(i).setmWY(1000);
-                                game_Boom--;
-                            }else {
-                                mIsRunning = false;
-                            }
-                        }
-                    }
-                    else if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
-
-                        if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
-                            if (game_Boom>0){
-                                wall_coordinates.get(i).setmWX(2000);
-                                wall_coordinates.get(i).setmWY(1000);
-                                game_Boom--;
-                            }else {
-                                mIsRunning = false;
-                            }
-                        }
-                        else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
-                            if (game_Boom>0){
-                                wall_coordinates.get(i).setmWX(2000);
-                                wall_coordinates.get(i).setmWY(1000);
-                                game_Boom--;
-                            }else {
-                                mIsRunning = false;
-                            }
-                        }
-                    }
-                }
-            }
-
-//            /*小球游戏完成*/
-//            if (Math.abs((mPosX+40)-1190)<=25 && Math.abs((mPosY+40)-620)<=25){
-//                mCanvas.drawText("游戏完成！！！",500,200,mPaint);
-//
-//                Intent intent = new Intent(MainActivity_game_page.this,MainActivity_game_end_page.class);
-//                startActivity(intent);
-//            }
-
             /*小球游戏结束*/
             if (mIsRunning == false){
-                mCanvas.drawText("游戏结束！！！",500,200,mPaint);
-
                 Intent intent = new Intent(MainActivity_game_page.this,MainActivity_game_end_page.class);
                 startActivity(intent);
             }
@@ -633,8 +480,6 @@ public class  MainActivity_game_page extends AppCompatActivity {
         @Override
         public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
             mIsRunning = false;
-
-
         }
 
         @Override
@@ -684,6 +529,166 @@ public class  MainActivity_game_page extends AppCompatActivity {
                 mPosY = mScreenBallHeight;
                 surfaceDestroyed(mSurfaceHolder);
             }
+
+            /*是否完成迷宫*/
+            if (mPosX-1190<=40 && mPosX > 1190){
+                if (mPosY - 620 <= 40 && mPosY > 620){
+                    surfaceDestroyed(mSurfaceHolder);
+                }
+                else if (620 - mPosY<=40 && mPosY < 620){
+                    surfaceDestroyed(mSurfaceHolder);
+                }
+            }else if (1190-mPosX<=40 && 1190 > mPosX){
+                if (mPosY - 620 <= 40 && mPosY > 620){
+                    surfaceDestroyed(mSurfaceHolder);
+                }
+                else if (620 - mPosY<=40 && mPosY < 620){
+                    surfaceDestroyed(mSurfaceHolder);
+                }
+            }
+
+            /*是否碰到wall*/
+            if (mPosX < (int)(mScreenWidth*0.3)){
+                for (int i = 0 ; i < (int)(wall_coordinates.size()*0.3)+20 ; i++){
+
+                    if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
+
+                        if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                surfaceDestroyed(mSurfaceHolder);
+                            }
+
+                        }
+                        else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                surfaceDestroyed(mSurfaceHolder);
+                            }
+                        }
+                    }
+                    else if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
+
+                        if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                surfaceDestroyed(mSurfaceHolder);
+                            }
+                        }
+                        else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                surfaceDestroyed(mSurfaceHolder);
+                            }
+                        }
+                    }
+                }
+            }else if (mPosX >=(int)( mScreenWidth*0.3) && mPosX < (int)(mScreenWidth*0.6)){
+                for (int i = (int) (wall_coordinates.size()*0.3); i < (int)(wall_coordinates.size()*0.6)+20 ; i ++){
+
+                    if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
+
+                        if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                surfaceDestroyed(mSurfaceHolder);
+                            }
+                        }
+                        else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                surfaceDestroyed(mSurfaceHolder);
+                            }
+                        }
+                    }
+                    else if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
+
+                        if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                surfaceDestroyed(mSurfaceHolder);
+                            }
+                        }
+                        else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                surfaceDestroyed(mSurfaceHolder);
+                            }
+                        }
+                    }
+                }
+            }else {
+                for (int i = (int) (wall_coordinates.size()*0.6); i < wall_coordinates.size() ; i ++){
+
+                    if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
+
+                        if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                surfaceDestroyed(mSurfaceHolder);
+                            }
+                        }
+                        else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                surfaceDestroyed(mSurfaceHolder);
+                            }
+                        }
+                    }
+                    else if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
+
+                        if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                surfaceDestroyed(mSurfaceHolder);
+                            }
+                        }
+                        else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+                            if (game_Boom>0){
+                                wall_coordinates.get(i).setmWX(2000);
+                                wall_coordinates.get(i).setmWY(1000);
+                                game_Boom--;
+                            }else {
+                                surfaceDestroyed(mSurfaceHolder);
+                            }
+                        }
+                    }
+                }
+            }
+
         }
     }
 

@@ -2,6 +2,8 @@ package com.example.lenovo.auicideball.rendering;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lenovo.auicideball.R;
@@ -16,10 +18,13 @@ public class MainActivity_Rank_List_page extends AppCompatActivity {
 
     private TextView mRank_list_user_name;
     private TextView mRank_list_user_score;
+    private Button mExit_Button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__rank__list_page);
+
+        //TODO 做一个recyclerView
 
         LitePal.getDatabase();
         User_data first = DataSupport.findFirst(User_data.class);
@@ -29,7 +34,14 @@ public class MainActivity_Rank_List_page extends AppCompatActivity {
 
         mRank_list_user_score = (TextView) findViewById(R.id.User_Score);
         mRank_list_user_score.setText(first.getScore()+"");
-        //TODO
+
+        mExit_Button = (Button) findViewById(R.id.exit_button);
+        mExit_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 

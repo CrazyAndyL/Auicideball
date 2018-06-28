@@ -58,6 +58,7 @@ public class MainActivity_personal_information extends AppCompatActivity {
         mUser_game_imageView = (ImageView) findViewById(R.id.user_game_imageView);
         mUser_imageView = (ImageView) findViewById(R.id.user_imageView);
 
+        /*查找数据库是否存有照片，并显示照片*/
         Remember_User first1 = DataSupport.findFirst(Remember_User.class);
         List<User_data> user_datas = DataSupport.findAll(User_data.class);
         for (User_data user_data_1:user_datas){
@@ -67,6 +68,7 @@ public class MainActivity_personal_information extends AppCompatActivity {
             }
         }
 
+        /*点击昵称切换账号*/
         mUser_name = (TextView) findViewById(R.id.user_name);
         mUser_name.setText(first1.getUser_name());
         mUser_name.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +79,7 @@ public class MainActivity_personal_information extends AppCompatActivity {
             }
         });
 
+        /*点击照片编辑照片*/
         mUser_imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,6 +121,7 @@ public class MainActivity_personal_information extends AppCompatActivity {
             }
         });
 
+        /*退出程序保存数据*/
         Button exit = (Button)findViewById(R.id.exit_button);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,15 +136,13 @@ public class MainActivity_personal_information extends AppCompatActivity {
                         User_data user_data = new User_data();
                         user_data.setHead_portrait(path);
                         user_data.updateAll("user_name = ?",first.getUser_name());
-                        Intent intent = new Intent(MainActivity_personal_information.this,MainActivity_main_page.class);
-                        startActivity(intent);
+                        finish();
                     }
                 });
                 exit.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(MainActivity_personal_information.this,MainActivity_main_page.class);
-                        startActivity(intent);
+                        finish();
                     }
                 });
                 exit.show();
@@ -234,5 +236,4 @@ public class MainActivity_personal_information extends AppCompatActivity {
             Toast.makeText(this,"failed to get image",Toast.LENGTH_SHORT).show();
         }
     }
-
 }
