@@ -18,77 +18,106 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-
         <EditText
             android:id="@+id/user_name_register"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="144dp"
+            android:layout_height="19dp"
+            android:background="@null"
             android:hint="user name"
-             />
-
+            android:textColor="#ffffff"
+            android:textColorHint="#888798"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline14"
+            app:layout_constraintStart_toStartOf="@+id/guideline13" />
 
 
         <EditText
             android:id="@+id/pass_word_register"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="144dp"
+            android:layout_height="19dp"
+            android:background="@null"
             android:hint="password"
-            app:layout_constraintStart_toStartOf="@+id/guideline13"
-            app:layout_constraintTop_toBottomOf="@+id/user_name_register" />
-
+            android:textColor="#ffffff"
+            android:textColorHint="#888798"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline28"
+            app:layout_constraintStart_toStartOf="@+id/guideline13" />
 
 
         <EditText
             android:id="@+id/re_pass_word_register"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="144dp"
+            android:layout_height="19dp"
+            android:background="@null"
             android:hint="repassword"
-            />
+            android:textColor="#ffffff"
+            android:textColorHint="#888798"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline29"
+            app:layout_constraintStart_toStartOf="@+id/guideline13" />
 
         <Button
             android:id="@+id/Register_ok_button"
+            android:layout_width="78dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/register_button"
-            android:layout_width="80dp"
-            android:layout_height="45dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline13" />
+            app:layout_constraintEnd_toStartOf="@+id/Back_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline24" />
 
         <Button
             android:id="@+id/Back_button"
-            android:layout_width="80dp"
-            android:layout_height="45dp"
+            android:layout_width="78dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/return_button"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginStart="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline13" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline24" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.79" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.45" />
+            app:layout_constraintGuide_percent="0.3" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_percent="0.37" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.55" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.73" />
+
 
     </android.support.constraint.ConstraintLayout>
 
