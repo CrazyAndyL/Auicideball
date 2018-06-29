@@ -40,20 +40,26 @@ public class MainActivity_Login_page extends AppCompatActivity {
         LitePal.getDatabase();
         Remember_User first = DataSupport.findFirst(Remember_User.class);
 
+        /*用户名*/
         usernameEdit= (EditText) findViewById(R.id.user_name_login);
         usernameEdit.setText(first.getUser_name());
 
+        /*密码*/
         passwordEdit=(EditText)findViewById(R.id.pass_word_login);
         passwordEdit.setText(first.getPassword());
 
+        /*注册按钮*/
         register_button = (Button)findViewById(R.id.Register_button);
         register_button.setOnClickListener(new View.OnClickListener() {      //跳转到注册界面
             @Override
             public void onClick(View v) {
                 Intent register_intent = new Intent(MainActivity_Login_page.this,MainActivity_Register_page.class);
                 startActivity(register_intent);
+                finish();
             }
         });
+
+        /*登录按钮*/
         login_button = (Button)findViewById(R.id.Login_ok_button);
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +84,8 @@ public class MainActivity_Login_page extends AppCompatActivity {
                             login_check = true;
                             Intent intent = new Intent(MainActivity_Login_page.this,MainActivity_main_page.class);
                             startActivity(intent);
+                            finish();
+
                         }else {
                             Toast.makeText(MainActivity_Login_page.this,"密码不正确",Toast.LENGTH_SHORT).show();
                         }
@@ -89,6 +97,7 @@ public class MainActivity_Login_page extends AppCompatActivity {
             }
         });
 
+        /*显示密码*/
         editText = (EditText) findViewById(R.id.pass_word_login);
         checkBox = (CheckBox) findViewById(R.id.checkbox);
 
