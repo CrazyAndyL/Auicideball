@@ -32,4 +32,5 @@ dependencies {
     implementation 'com.android.databinding:adapters:3.2.0-alpha18'
     implementation 'com.android.support.test.espresso:espresso-core:3.0.2-alpha1'
     implementation 'org.litepal.android:core:1.6.1'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.12'
 }
