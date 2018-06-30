@@ -55,7 +55,7 @@ public class MainActivity_personal_information extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_personal_information);
         LitePal.getDatabase();
-        mUser_game_imageView = (ImageView) findViewById(R.id.user_game_imageView);
+//        mUser_game_imageView = (ImageView) findViewById(R.id.user_game_imageView);
         mUser_imageView = (ImageView) findViewById(R.id.user_imageView);
 
         /*查找数据库是否存有照片，并显示照片*/
