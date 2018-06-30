@@ -28,11 +28,16 @@ import com.example.lenovo.auicideball.backstage.Boom_coordinate;
 import com.example.lenovo.auicideball.backstage.Lightning_coordinate;
 import com.example.lenovo.auicideball.R;
 import com.example.lenovo.auicideball.backstage.MazePoint;
+import com.example.lenovo.auicideball.backstage.Remember_User;
 import com.example.lenovo.auicideball.backstage.Score_coordinate;
+import com.example.lenovo.auicideball.backstage.User_data;
 import com.example.lenovo.auicideball.backstage.Wall_coordinate;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
@@ -447,6 +452,21 @@ public class  MainActivity_game_page extends AppCompatActivity {
 
             /*小球游戏结束*/
             if (mIsRunning == false){
+                Remember_User first = DataSupport.findFirst(Remember_User.class);
+                Remember_User remember_user = new Remember_User();
+                remember_user.setScore(game_Score);
+                remember_user.updateAll("user_name = ?",first.getUser_name());
+                List<User_data> user_datas = DataSupport.findAll(User_data.class);
+                for (User_data user_data:user_datas){
+                    if (user_data.getUser_name().equals(first.getUser_name())){
+                        if (user_data.getScore() < game_Score){
+                            User_data user_data_update = new User_data();
+                            user_data_update.setScore(game_Score);
+                            user_data_update.updateAll("user_name = ?",first.getUser_name());
+                        }
+                    }
+                }
+
                 Intent intent = new Intent(MainActivity_game_page.this,MainActivity_game_end_page.class);
                 startActivity(intent);
             }

@@ -42,6 +42,14 @@ public class MainActivity_game_end_page extends AppCompatActivity {
         mUser_imageView.setImageBitmap(bitmap);
         mUser_name.setText(first.getUser_name());
         mUser_score.setText(first.getScore()+"");
+//        List<User_data> user_datas = DataSupport.findAll(User_data.class);
+//        for (User_data user_data : user_datas){
+//            if (user_data.getUser_name().equals(first.getUser_name())){
+//                Remember_User remember_user = new Remember_User();
+//                remember_user.setScore(user_data.getScore());
+//                remember_user.updateAll("user_name = ?",first.getUser_name());
+//            }
+//        }
 
         mgame_again_button = (Button)findViewById(R.id.game_again);
         mgame_again_button.setOnClickListener(new View.OnClickListener() {
