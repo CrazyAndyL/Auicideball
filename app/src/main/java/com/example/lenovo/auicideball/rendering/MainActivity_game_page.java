@@ -12,6 +12,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Vibrator;
 import android.support.annotation.IntRange;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,7 @@ import com.example.lenovo.auicideball.backstage.Lightning_coordinate;
 import com.example.lenovo.auicideball.R;
 import com.example.lenovo.auicideball.backstage.MazePoint;
 import com.example.lenovo.auicideball.backstage.Score_coordinate;
+import com.example.lenovo.auicideball.backstage.SingleTon;
 import com.example.lenovo.auicideball.backstage.Wall_coordinate;
 
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ import static android.hardware.SensorManager.DATA_X;
 public class  MainActivity_game_page extends AppCompatActivity {
 
     MyView mAnimView = null;
+    Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,13 @@ public class  MainActivity_game_page extends AppCompatActivity {
 
         mAnimView = new MyView(this);
         setContentView(mAnimView);
+
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+
+
     }
+
 
     public class MyView extends SurfaceView implements SurfaceHolder.Callback,Runnable,SensorEventListener{
 
@@ -554,21 +563,27 @@ public class  MainActivity_game_page extends AppCompatActivity {
                     if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
 
                         if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+
+                            Check();
                             if (game_Boom>0){
                                 wall_coordinates.get(i).setmWX(2000);
                                 wall_coordinates.get(i).setmWY(1000);
                                 game_Boom--;
                             }else {
+                                vibrator.cancel();
                                 surfaceDestroyed(mSurfaceHolder);
                             }
 
                         }
                         else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+
+                            Check();
                             if (game_Boom>0){
                                 wall_coordinates.get(i).setmWX(2000);
                                 wall_coordinates.get(i).setmWY(1000);
                                 game_Boom--;
                             }else {
+                                vibrator.cancel();
                                 surfaceDestroyed(mSurfaceHolder);
                             }
                         }
@@ -576,20 +591,26 @@ public class  MainActivity_game_page extends AppCompatActivity {
                     else if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
 
                         if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+
+                            Check();
                             if (game_Boom>0){
                                 wall_coordinates.get(i).setmWX(2000);
                                 wall_coordinates.get(i).setmWY(1000);
                                 game_Boom--;
                             }else {
+                                vibrator.cancel();
                                 surfaceDestroyed(mSurfaceHolder);
                             }
                         }
                         else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+
+                            Check();
                             if (game_Boom>0){
                                 wall_coordinates.get(i).setmWX(2000);
                                 wall_coordinates.get(i).setmWY(1000);
                                 game_Boom--;
                             }else {
+                                vibrator.cancel();
                                 surfaceDestroyed(mSurfaceHolder);
                             }
                         }
@@ -601,20 +622,26 @@ public class  MainActivity_game_page extends AppCompatActivity {
                     if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
 
                         if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+
+                            Check();
                             if (game_Boom>0){
                                 wall_coordinates.get(i).setmWX(2000);
                                 wall_coordinates.get(i).setmWY(1000);
                                 game_Boom--;
                             }else {
+                                vibrator.cancel();
                                 surfaceDestroyed(mSurfaceHolder);
                             }
                         }
                         else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+
+                            Check();
                             if (game_Boom>0){
                                 wall_coordinates.get(i).setmWX(2000);
                                 wall_coordinates.get(i).setmWY(1000);
                                 game_Boom--;
                             }else {
+                                vibrator.cancel();
                                 surfaceDestroyed(mSurfaceHolder);
                             }
                         }
@@ -622,20 +649,26 @@ public class  MainActivity_game_page extends AppCompatActivity {
                     else if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
 
                         if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+
+                            Check();
                             if (game_Boom>0){
                                 wall_coordinates.get(i).setmWX(2000);
                                 wall_coordinates.get(i).setmWY(1000);
                                 game_Boom--;
                             }else {
+                                vibrator.cancel();
                                 surfaceDestroyed(mSurfaceHolder);
                             }
                         }
                         else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+
+                            Check();
                             if (game_Boom>0){
                                 wall_coordinates.get(i).setmWX(2000);
                                 wall_coordinates.get(i).setmWY(1000);
                                 game_Boom--;
                             }else {
+                                vibrator.cancel();
                                 surfaceDestroyed(mSurfaceHolder);
                             }
                         }
@@ -647,20 +680,26 @@ public class  MainActivity_game_page extends AppCompatActivity {
                     if (mPosX - wall_coordinates.get(i).getmWX() <= 50 && mPosX>wall_coordinates.get(i).getmWX()){
 
                         if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+
+                            Check();
                             if (game_Boom>0){
                                 wall_coordinates.get(i).setmWX(2000);
                                 wall_coordinates.get(i).setmWY(1000);
                                 game_Boom--;
                             }else {
+                                vibrator.cancel();
                                 surfaceDestroyed(mSurfaceHolder);
                             }
                         }
                         else if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+
+                            Check();
                             if (game_Boom>0){
                                 wall_coordinates.get(i).setmWX(2000);
                                 wall_coordinates.get(i).setmWY(1000);
                                 game_Boom--;
                             }else {
+                                vibrator.cancel();
                                 surfaceDestroyed(mSurfaceHolder);
                             }
                         }
@@ -668,20 +707,26 @@ public class  MainActivity_game_page extends AppCompatActivity {
                     else if (wall_coordinates.get(i).getmWX() - mPosX <= 50 && mPosX<wall_coordinates.get(i).getmWX()){
 
                         if (wall_coordinates.get(i).getmWY() - mPosY <= 50 && mPosY<wall_coordinates.get(i).getmWY()){
+
+                            Check();
                             if (game_Boom>0){
                                 wall_coordinates.get(i).setmWX(2000);
                                 wall_coordinates.get(i).setmWY(1000);
                                 game_Boom--;
                             }else {
+                                vibrator.cancel();
                                 surfaceDestroyed(mSurfaceHolder);
                             }
                         }
                         else if (mPosY - wall_coordinates.get(i).getmWY() <= 50 && mPosY>wall_coordinates.get(i).getmWY()){
+
+                            Check();
                             if (game_Boom>0){
                                 wall_coordinates.get(i).setmWX(2000);
                                 wall_coordinates.get(i).setmWY(1000);
                                 game_Boom--;
                             }else {
+                                vibrator.cancel();
                                 surfaceDestroyed(mSurfaceHolder);
                             }
                         }
@@ -690,6 +735,15 @@ public class  MainActivity_game_page extends AppCompatActivity {
             }
 
         }
+    }
+    public void Check(){
+
+        if (SingleTon.getOurInstance().getCheck() == true){
+            vibrator.vibrate(300);
+        }else {
+            vibrator.cancel();
+        }
+
     }
 
     public class Maze{

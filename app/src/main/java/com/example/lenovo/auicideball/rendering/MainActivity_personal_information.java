@@ -49,7 +49,7 @@ public class MainActivity_personal_information extends AppCompatActivity {
     public static final int TAKE_PHOTO = 1;
     private Uri imageUri;
     String[] items = new String[]{"拍照","相册"};
-    String x;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,6 +120,8 @@ public class MainActivity_personal_information extends AppCompatActivity {
                 }).show();
             }
         });
+
+        //TODO 添加小球皮肤 recyclerView 横向滑动点击显示
 
         /*退出程序保存数据*/
         Button exit = (Button)findViewById(R.id.exit_button);
