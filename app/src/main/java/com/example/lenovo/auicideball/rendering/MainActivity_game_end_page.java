@@ -36,6 +36,13 @@ public class MainActivity_game_end_page extends AppCompatActivity {
 
         mUser_score = (TextView) findViewById(R.id.user_score);
 
+        LitePal.getDatabase();
+        Remember_User first = DataSupport.findFirst(Remember_User.class);
+        Bitmap bitmap = BitmapFactory.decodeFile(first.getHead_portrait());
+        mUser_imageView.setImageBitmap(bitmap);
+        mUser_name.setText(first.getUser_name());
+        mUser_score.setText(first.getScore()+"");
+
         mgame_again_button = (Button)findViewById(R.id.game_again);
         mgame_again_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,18 +62,5 @@ public class MainActivity_game_end_page extends AppCompatActivity {
                 finish();
             }
         });
-
-        LitePal.getDatabase();
-        Remember_User first = DataSupport.findFirst(Remember_User.class);
-        List<User_data> user_datas = DataSupport.findAll(User_data.class);
-        for (User_data user_data:user_datas){
-            if (user_data.getUser_name().equals(first.getUser_name())){
-                Bitmap bitmap = BitmapFactory.decodeFile(user_data.getHead_portrait());
-                mUser_imageView.setImageBitmap(bitmap);
-                mUser_name.setText(user_data.getUser_name());
-                mUser_score.setText(user_data.getScore()+"");
-                break;
-            }
-        }
     }
 }

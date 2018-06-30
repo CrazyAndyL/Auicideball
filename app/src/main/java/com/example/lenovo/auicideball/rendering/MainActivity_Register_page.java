@@ -84,24 +84,27 @@ public class MainActivity_Register_page extends AppCompatActivity {
                                 Remember_User remember_user = new Remember_User();
                                 remember_user.setUser_name(username);
                                 remember_user.setPassword(password);
+                                remember_user.setHead_portrait("");
+                                remember_user.setScore(0);
                                 remember_user.save();
-                                final AlertDialog.Builder back_login = new AlertDialog.Builder(MainActivity_Register_page.this);
+                                MainActivity_Dialog back_login = new MainActivity_Dialog(MainActivity_Register_page.this);
+
+
                                 back_login.setTitle("注册成功");
                                 back_login.setMessage("是否跳转登录界面");
                                 back_login.setCancelable(false);
-                                back_login.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                back_login.setYesOnclickListener("YES", new MainActivity_Dialog.onYesOnclickListener() {
                                     @Override
-                                    public void onClick(DialogInterface dialog, int which) {
+                                    public void onYesClick() {
                                         Intent login_intent = new Intent(MainActivity_Register_page.this,MainActivity_Login_page.class);
                                         startActivity(login_intent);
                                         finish();
                                     }
                                 });
-                                back_login.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                back_login.setNoOnclickListener("NO", new MainActivity_Dialog.onNoOnclickListener() {
                                     @Override
-                                    public void onClick(DialogInterface dialog, int which) {
+                                    public void onNoClick() {
                                         finish();
-
                                     }
                                 });
                                 back_login.show();
