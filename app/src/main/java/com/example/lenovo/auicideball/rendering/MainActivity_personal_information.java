@@ -128,26 +128,11 @@ public class MainActivity_personal_information extends AppCompatActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder exit = new AlertDialog.Builder(MainActivity_personal_information.this);
-                exit.setMessage("是否保存");
-                exit.setCancelable(false);
-                exit.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Remember_User first = DataSupport.findFirst(Remember_User.class);
-                        User_data user_data = new User_data();
-                        user_data.setHead_portrait(path);
-                        user_data.updateAll("user_name = ?",first.getUser_name());
-                        finish();
-                    }
-                });
-                exit.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });
-                exit.show();
+                Remember_User first = DataSupport.findFirst(Remember_User.class);
+                User_data user_data = new User_data();
+                user_data.setHead_portrait(path);
+                user_data.updateAll("user_name = ?",first.getUser_name());
+                finish();
             }
         });
     }
