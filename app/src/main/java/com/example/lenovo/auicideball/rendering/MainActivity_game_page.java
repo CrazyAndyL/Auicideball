@@ -29,9 +29,13 @@ import com.example.lenovo.auicideball.backstage.Boom_coordinate;
 import com.example.lenovo.auicideball.backstage.Lightning_coordinate;
 import com.example.lenovo.auicideball.R;
 import com.example.lenovo.auicideball.backstage.MazePoint;
+import com.example.lenovo.auicideball.backstage.Remember_User;
 import com.example.lenovo.auicideball.backstage.Score_coordinate;
 import com.example.lenovo.auicideball.backstage.SingleTon;
+import com.example.lenovo.auicideball.backstage.User_data;
 import com.example.lenovo.auicideball.backstage.Wall_coordinate;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -158,6 +162,11 @@ public class  MainActivity_game_page extends AppCompatActivity {
 
         public MyView(Context context) {
             super(context);
+
+            game_Score = 0;
+            game_Boom = 1;
+            game_Linght = 1;
+
             /*设置当前View拥有控制焦点*/
             this.setFocusable(true);
             /*设置当前View拥有出触摸时间*/
@@ -188,7 +197,6 @@ public class  MainActivity_game_page extends AppCompatActivity {
             mbitmapSoced = BitmapFactory.decodeResource(this.getResources(),R.drawable.scored);
             /*加载目标结束*/
             mbitmapEnd = BitmapFactory.decodeResource(this.getResources(),R.drawable.end);
-
             /*迷宫*/
             mazes.traversal();
             mazes.create();
@@ -197,13 +205,10 @@ public class  MainActivity_game_page extends AppCompatActivity {
             for (int i = 0 ; i < 2*height+1 ; i++){
                 for (int j = 0 ; j < 2*width+1 ; j++){
                     if (mazes.maze[i][j] == mazes.gridWall){
-                        mCanvas.drawBitmap(mbitmapWall,i*70,j*70,mPaint);
                         Wall_coordinate wall_coordinate = new Wall_coordinate();
                         wall_coordinate.setmWX(i*70);
                         wall_coordinate.setmWY(j*70);
                         wall_coordinates.add(wall_coordinate);
-                        map.put(wall_coordinate,"IsWall");
-
                     }
                 }
             }
@@ -456,6 +461,9 @@ public class  MainActivity_game_page extends AppCompatActivity {
 
             /*小球游戏结束*/
             if (mIsRunning == false){
+                //TODO 分数写进数据库中
+
+                //TODO 请勿修改本页其他代码
                 Intent intent = new Intent(MainActivity_game_page.this,MainActivity_game_end_page.class);
                 startActivity(intent);
             }
