@@ -85,5 +85,7 @@ public class MainActivity_main_page extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //TODO 添加recyclerView 横向滑动显示图片
     }
 }

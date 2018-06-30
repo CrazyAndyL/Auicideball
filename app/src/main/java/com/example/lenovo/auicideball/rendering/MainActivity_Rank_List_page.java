@@ -24,7 +24,7 @@ public class MainActivity_Rank_List_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__rank__list_page);
 
-        //TODO 做一个recyclerView
+        //TODO 做一个recyclerView 竖向滑动
 
         LitePal.getDatabase();
         User_data first = DataSupport.findFirst(User_data.class);
