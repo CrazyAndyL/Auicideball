@@ -18,14 +18,14 @@ public class MainActivity_register_login_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_register_login_page);
 
-        mLogin_button = (Button) findViewById(R.id.Login_button);
-        mLogin_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity_register_login_page.this,MainActivity_Login_page.class);
-                startActivity(intent);
-            }
-        });
+//        mLogin_button = (Button) findViewById(R.id.Login_button);
+//        mLogin_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity_register_login_page.this,MainActivity_Login_page.class);
+//                startActivity(intent);
+//            }
+//        });
         mRegister_button = (Button) findViewById(R.id.Register_button);
         mRegister_button.setOnClickListener(new View.OnClickListener() {
             @Override
