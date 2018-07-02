@@ -5,49 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".rendering.MainActivity_register_login_page"
-    android:background="@drawable/first_open_bg">
+    android:background="@drawable/game_regulation_bg">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/Login_button"
-            android:layout_width="120dp"
-            android:layout_height="60dp"
-            android:textSize="15dp"
-            android:text="登录"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline12"
-            app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
         <Button
             android:id="@+id/Register_button"
-            android:layout_width="120dp"
-            android:layout_height="60dp"
-            android:textSize="15dp"
-            android:text="注册"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
+            android:layout_width="155dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="@+id/guideline12"
-            app:layout_constraintTop_toTopOf="@+id/guideline11" />
+            android:background="@drawable/register_now_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/guideline11"
+            android:id="@+id/guideline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.6" />
+            app:layout_constraintGuide_percent="0.8" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
 
     </android.support.constraint.ConstraintLayout>
 
