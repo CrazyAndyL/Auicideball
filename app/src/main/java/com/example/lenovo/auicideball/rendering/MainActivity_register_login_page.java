@@ -11,7 +11,6 @@ import com.example.lenovo.auicideball.backstage.CacheActivity;
 
 public class MainActivity_register_login_page extends AppCompatActivity {
 
-    private Button mLogin_button;
     private Button mRegister_button;
 
     @Override

@@ -414,12 +414,12 @@ public class  MainActivity_game_page extends AppCompatActivity {
                     if (mPosY-score_coordinates.get(i).getmSY()<=mK && mPosY > score_coordinates.get(i).getmSY()){
                         score_coordinates.get(i).setmSX(2000);
                         score_coordinates.get(i).setmSY(1000);
-                        game_Score++;
+                        game_Score=game_Score+10;
                     }
                     else if (score_coordinates.get(i).getmSY()-mPosY<=mK && mPosY < score_coordinates.get(i).getmSY()){
                         score_coordinates.get(i).setmSX(2000);
                         score_coordinates.get(i).setmSY(1000);
-                        game_Score++;
+                        game_Score=game_Score+10;
                     }
                 }
                 else if (score_coordinates.get(i).getmSX()-mPosX<=mK && mPosX < score_coordinates.get(i).getmSX()){
@@ -427,12 +427,12 @@ public class  MainActivity_game_page extends AppCompatActivity {
                     if (mPosY-score_coordinates.get(i).getmSY()<=mK && mPosY > score_coordinates.get(i).getmSY()){
                         score_coordinates.get(i).setmSX(2000);
                         score_coordinates.get(i).setmSY(1000);
-                        game_Score++;
+                        game_Score=game_Score+10;
                     }
                     else if (score_coordinates.get(i).getmSY()-mPosY<=mK && mPosY < score_coordinates.get(i).getmSY()){
                         score_coordinates.get(i).setmSX(2000);
                         score_coordinates.get(i).setmSY(1000);
-                        game_Score++;
+                        game_Score=game_Score+10;
                     }
                 }
             }
