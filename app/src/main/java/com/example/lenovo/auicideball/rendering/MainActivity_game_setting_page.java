@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.example.lenovo.auicideball.R;
+import com.example.lenovo.auicideball.backstage.CacheActivity;
 import com.example.lenovo.auicideball.backstage.SingleTon;
 
 public class MainActivity_game_setting_page extends AppCompatActivity{
@@ -22,7 +23,10 @@ public class MainActivity_game_setting_page extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_game_setting_page);
-
+        /*Activity加入缓存池内*/
+        if (!CacheActivity.activityArrayList.contains(MainActivity_game_setting_page.this)){
+            CacheActivity.addActivity(MainActivity_game_setting_page.this);
+        }
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         mSwitch4 = (Switch) findViewById(R.id.switch4);  //背景音乐
@@ -68,7 +72,7 @@ public class MainActivity_game_setting_page extends AppCompatActivity{
         mReturn_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                CacheActivity.finishSingleActivity(MainActivity_game_setting_page.this);
             }
         });
 
@@ -79,7 +83,7 @@ public class MainActivity_game_setting_page extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity_game_setting_page.this,MainActivity_Login_page.class);
                 startActivity(intent);
-                finish();
+                CacheActivity.finishSingleActivity(MainActivity_game_setting_page.this);
             }
         });
     }

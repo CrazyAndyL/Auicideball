@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.lenovo.auicideball.R;
+import com.example.lenovo.auicideball.backstage.CacheActivity;
 import com.example.lenovo.auicideball.backstage.Remember_User;
 import com.example.lenovo.auicideball.backstage.User_data;
 
@@ -37,6 +38,10 @@ public class MainActivity_Login_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__login_page);
+        /*Activity加入缓存池内*/
+        if (!CacheActivity.activityArrayList.contains(MainActivity_Login_page.this)){
+            CacheActivity.addActivity(MainActivity_Login_page.this);
+        }
         LitePal.getDatabase();
         Remember_User first = DataSupport.findFirst(Remember_User.class);
 
@@ -55,7 +60,7 @@ public class MainActivity_Login_page extends AppCompatActivity {
             public void onClick(View v) {
                 Intent register_intent = new Intent(MainActivity_Login_page.this,MainActivity_Register_page.class);
                 startActivity(register_intent);
-                finish();
+                CacheActivity.finishSingleActivity(MainActivity_Login_page.this);
             }
         });
 
@@ -84,7 +89,7 @@ public class MainActivity_Login_page extends AppCompatActivity {
                             login_check = true;
                             Intent intent = new Intent(MainActivity_Login_page.this,MainActivity_main_page.class);
                             startActivity(intent);
-                            finish();
+                            CacheActivity.finishSingleActivity(MainActivity_Login_page.this);
 
                         }else {
                             Toast.makeText(MainActivity_Login_page.this,"密码不正确",Toast.LENGTH_SHORT).show();

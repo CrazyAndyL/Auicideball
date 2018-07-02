@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lenovo.auicideball.R;
+import com.example.lenovo.auicideball.backstage.CacheActivity;
 
 public class MainActivity_Dialog extends Dialog {
 
@@ -57,6 +58,7 @@ public class MainActivity_Dialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__dialog);
+
         //按空白处不能取消动画
         setCanceledOnTouchOutside(false);
 

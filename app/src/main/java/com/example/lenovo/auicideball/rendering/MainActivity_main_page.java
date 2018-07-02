@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.lenovo.auicideball.R;
+import com.example.lenovo.auicideball.backstage.CacheActivity;
 import com.example.lenovo.auicideball.backstage.Remember_User;
 import com.example.lenovo.auicideball.backstage.User_data;
 
@@ -31,6 +32,9 @@ public class MainActivity_main_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_mainpage);
+
+        /*清除所有缓存池内的Activity*/
+        CacheActivity.finishActivity();
 
         /*开始游戏*/
         mStart_game_button = (Button) findViewById(R.id.start_game_button);

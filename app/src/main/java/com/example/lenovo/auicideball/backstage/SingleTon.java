@@ -3,6 +3,9 @@ package com.example.lenovo.auicideball.backstage;
 public class SingleTon {
 
     boolean ischeck;
+
+    boolean isFinish;
+
     private SingleTon(){}
 
     public static SingleTon getOurInstance(){
@@ -16,5 +19,13 @@ public class SingleTon {
 
     public boolean getCheck(){
         return ischeck;
+    }
+
+    public void saveFinish(boolean _isFinish){
+        isFinish = _isFinish;
+    }
+
+    public boolean getFinish(){
+        return isFinish;
     }
 }

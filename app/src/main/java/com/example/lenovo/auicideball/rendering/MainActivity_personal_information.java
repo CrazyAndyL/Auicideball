@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lenovo.auicideball.R;
+import com.example.lenovo.auicideball.backstage.CacheActivity;
 import com.example.lenovo.auicideball.backstage.Remember_User;
 import com.example.lenovo.auicideball.backstage.User_data;
 
@@ -54,8 +55,12 @@ public class MainActivity_personal_information extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_personal_information);
+        /*Activity加入缓存池内*/
+        if (!CacheActivity.activityArrayList.contains(MainActivity_personal_information.this)){
+            CacheActivity.addActivity(MainActivity_personal_information.this);
+        }
+
         LitePal.getDatabase();
-//        mUser_game_imageView = (ImageView) findViewById(R.id.user_game_imageView);
         mUser_imageView = (ImageView) findViewById(R.id.user_imageView);
 
         /*查找数据库是否存有照片，并显示照片*/
@@ -133,7 +138,7 @@ public class MainActivity_personal_information extends AppCompatActivity {
                 Remember_User remember_user = new Remember_User();
                 remember_user.setHead_portrait(path);
                 remember_user.updateAll("user_name = ?",first.getUser_name());
-                finish();
+                CacheActivity.finishSingleActivity(MainActivity_personal_information.this);
             }
         });
     }

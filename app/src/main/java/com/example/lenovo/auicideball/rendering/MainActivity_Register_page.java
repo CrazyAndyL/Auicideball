@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.lenovo.auicideball.R;
+import com.example.lenovo.auicideball.backstage.CacheActivity;
 import com.example.lenovo.auicideball.backstage.Remember_User;
 import com.example.lenovo.auicideball.backstage.User_data;
 
@@ -50,7 +51,10 @@ public class MainActivity_Register_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__register_page);
-
+        /*Activity加入缓存池内*/
+        if (!CacheActivity.activityArrayList.contains(MainActivity_Register_page.this)){
+            CacheActivity.addActivity(MainActivity_Register_page.this);
+        }
         usernameEdit = (EditText)findViewById(R.id.user_name_register);
         passwordEdit = (EditText)findViewById(R.id.pass_word_register);
         re_passwordEdit = (EditText)findViewById(R.id.re_pass_word_register);
@@ -127,7 +131,7 @@ public class MainActivity_Register_page extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                CacheActivity.finishSingleActivity(MainActivity_Register_page.this);
             }
         });
     }

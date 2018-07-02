@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lenovo.auicideball.R;
+import com.example.lenovo.auicideball.backstage.CacheActivity;
 import com.example.lenovo.auicideball.backstage.DrawView;
 
 import java.util.ArrayList;
@@ -24,7 +25,10 @@ public class MainActivity_game1_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_game1_page);
-
+        /*Activity加入缓存池内*/
+        if (!CacheActivity.activityArrayList.contains(MainActivity_game1_page.this)){
+            CacheActivity.addActivity(MainActivity_game1_page.this);
+        }
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         linearLayoutManager = new LinearLayoutManager(MainActivity_game1_page.this);
         mRecyclerView.setLayoutManager(linearLayoutManager);

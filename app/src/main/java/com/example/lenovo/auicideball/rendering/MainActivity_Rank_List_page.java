@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lenovo.auicideball.R;
+import com.example.lenovo.auicideball.backstage.CacheActivity;
 import com.example.lenovo.auicideball.backstage.User_data;
 
 import org.litepal.LitePal;
@@ -23,7 +24,10 @@ public class MainActivity_Rank_List_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__rank__list_page);
-
+        /*Activity加入缓存池内*/
+        if (!CacheActivity.activityArrayList.contains(MainActivity_Rank_List_page.this)){
+            CacheActivity.addActivity(MainActivity_Rank_List_page.this);
+        }
         //TODO 做一个recyclerView 竖向滑动
 
         LitePal.getDatabase();
@@ -39,7 +43,7 @@ public class MainActivity_Rank_List_page extends AppCompatActivity {
         mExit_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                CacheActivity.finishSingleActivity(MainActivity_Rank_List_page.this);
             }
         });
 
