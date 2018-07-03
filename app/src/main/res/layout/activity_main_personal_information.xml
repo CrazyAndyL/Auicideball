@@ -39,7 +39,9 @@
             android:id="@+id/user_imageView"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/personal_default_profile"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toStartOf="@+id/guideline16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,18 +50,15 @@
             android:id="@+id/user_name"
             android:layout_width="80dp"
             android:layout_height="30dp"
-            android:layout_marginBottom="5dp"
             android:layout_marginLeft="52dp"
             android:layout_marginStart="52dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:gravity="center"
             android:text="sugar123"
             android:textColor="#ffffff"
             android:textSize="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline10"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_imageView"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/user_imageView" />
 
         <ImageView
             android:id="@+id/imageView"
