@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import android.widget.Button;
@@ -19,6 +21,7 @@ import com.example.lenovo.auicideball.backstage.User_data;
 import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,6 +30,8 @@ public class MainActivity_main_page extends AppCompatActivity {
     private Button mSetting_button;
     private ImageButton mImageButton;
     private Button mRank_list_Burron;
+    private RecyclerView mView;
+    private List<Picture> mList=new ArrayList<Picture>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,21 @@ public class MainActivity_main_page extends AppCompatActivity {
 
         /*清除所有缓存池内的Activity*/
         CacheActivity.finishActivity();
+        //绑定id
+        bindID();
+        //添加数据
+        addData();
+        //创建LinearLayoutManager
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        //设置
+        mView.setLayoutManager(manager);
+        //实例化适配器
+        Picture_adapter myAdapter = new Picture_adapter(mList);
+        //设置适配器
+        mView.setAdapter(myAdapter);
+
+
 
         /*开始游戏*/
         mStart_game_button = (Button) findViewById(R.id.start_game_button);
@@ -91,5 +111,35 @@ public class MainActivity_main_page extends AppCompatActivity {
         });
 
         //TODO 添加recyclerView 横向滑动显示图片
+    }
+
+    private void addData() {//TODO 添加图片
+        for (int i = 0 ; i<1 ; i++){
+            Picture itemVO = new Picture(R.drawable.checkpoint_0,"");
+            mList.add(itemVO);
+            itemVO = null;
+            Picture itemV1=new Picture(R.drawable.game_checkpoint,"");
+            mList.add(itemV1);
+            itemV1 = null;
+            Picture itemV2=new Picture(R.drawable.checkpoint_1,"");
+            mList.add(itemV2);
+            itemV2 = null;
+            Picture itemV3=new Picture(R.drawable.checkpoint_2,"");
+            mList.add(itemV3);
+            itemV3=null;
+            Picture itemV4=new Picture(R.drawable.checkpoint_3,"");
+            mList.add(itemV4);
+            itemV4=null;
+            Picture itemV5=new Picture(R.drawable.checkpoint_0,"");
+            mList.add(itemV5);
+            itemV5=null;
+            //添加到数组
+
+
+        }
+    }
+
+    private void bindID() {
+        mView = (RecyclerView) findViewById(R.id.recycler_view1);
     }
 }

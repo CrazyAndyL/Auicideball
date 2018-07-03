@@ -19,6 +19,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +40,7 @@ import org.w3c.dom.Text;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity_personal_information extends AppCompatActivity {
@@ -51,14 +54,32 @@ public class MainActivity_personal_information extends AppCompatActivity {
     private Uri imageUri;
     String[] items = new String[]{"拍照","相册"};
     String x;
+    private RecyclerView mView;
+    private List<Picture> mList=new ArrayList<Picture>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_personal_information);
         /*Activity加入缓存池内*/
+        //绑定id
+        bindID();
+        //添加数据
+        addData();
+        //创建LinearLayoutManager
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        //设置
+        mView.setLayoutManager(manager);
+        //实例化适配器
+        PictureAdapter myAdapter = new PictureAdapter(mList);
+        //设置适配器
+        mView.setAdapter(myAdapter);
+
         if (!CacheActivity.activityArrayList.contains(MainActivity_personal_information.this)){
             CacheActivity.addActivity(MainActivity_personal_information.this);
         }
+
+
 
         LitePal.getDatabase();
         mUser_imageView = (ImageView) findViewById(R.id.user_imageView);
@@ -142,6 +163,34 @@ public class MainActivity_personal_information extends AppCompatActivity {
             }
         });
     }
+
+    private void addData() {//TODO  添加图片
+        for (int i = 0 ; i<1 ; i++){
+            Picture itemVO = new Picture(R.drawable.ball_0,"");
+            mList.add(itemVO);
+            itemVO = null;
+            Picture itemV1=new Picture(R.drawable.ball_1,"");
+            mList.add(itemV1);
+            itemV1 = null;
+            Picture itemV2=new Picture(R.drawable.ball_2,"");
+            mList.add(itemV2);
+            itemV2 = null;
+            Picture itemV3=new Picture(R.drawable.ball_3,"");
+            mList.add(itemV3);
+            itemV3=null;
+            Picture itemV4=new Picture(R.drawable.ball_4,"");
+            mList.add(itemV4);
+            itemV4=null;
+            //添加到数组
+
+
+        }
+    }
+
+    private void bindID() {
+        mView = (RecyclerView) findViewById(R.id.recycler_view2);
+    }
+
     private void openAlbum(){
         Intent intent = new Intent("android.intent.action.GET_CONTENT");
         intent.setType("image/*");
