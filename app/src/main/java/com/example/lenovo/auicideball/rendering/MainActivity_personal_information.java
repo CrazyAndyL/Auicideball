@@ -181,6 +181,21 @@ public class MainActivity_personal_information extends AppCompatActivity {
             Picture itemV4=new Picture(R.drawable.ball_4,"");
             mList.add(itemV4);
             itemV4=null;
+            Picture itemV5=new Picture(R.drawable.ball_5,"");
+            mList.add(itemV5);
+            itemV5=null;
+            Picture itemV6=new Picture(R.drawable.ball_6,"");
+            mList.add(itemV6);
+            itemV6=null;
+            Picture itemV7=new Picture(R.drawable.ball_7,"");
+            mList.add(itemV7);
+            itemV7=null;
+            Picture itemV8=new Picture(R.drawable.ball_8,"");
+            mList.add(itemV8);
+            itemV8=null;
+            Picture itemV9=new Picture(R.drawable.ball_9,"");
+            mList.add(itemV9);
+            itemV9=null;
             //添加到数组
 
 
