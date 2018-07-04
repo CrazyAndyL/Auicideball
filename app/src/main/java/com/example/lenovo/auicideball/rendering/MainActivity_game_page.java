@@ -141,7 +141,6 @@ public class  MainActivity_game_page extends AppCompatActivity {
         /*Wall数组*/
         ArrayList<Wall_coordinate> wall_coordinates = new ArrayList<>();
 
-        HashMap<Wall_coordinate,String> map = new HashMap<>();
 
         /*随机数*/
         Random random = new Random();
@@ -215,7 +214,6 @@ public class  MainActivity_game_page extends AppCompatActivity {
                         wall_coordinate.setmWX(i*70);
                         wall_coordinate.setmWY(j*70);
                         wall_coordinates.add(wall_coordinate);
-                        map.put(wall_coordinate,"IsWall");
 
                     }
                 }
@@ -530,9 +528,9 @@ public class  MainActivity_game_page extends AppCompatActivity {
 
         @Override
         public void run() {
-            while (mIsRunning){
+            while (mIsRunning) {
                 /*在这里加上安全锁*/
-                synchronized (mSurfaceHolder){
+                synchronized (mSurfaceHolder) {
                     /*拿到当前画布 然后锁定*/
                     mCanvas = mSurfaceHolder.lockCanvas();
                     Draw();
@@ -541,11 +539,11 @@ public class  MainActivity_game_page extends AppCompatActivity {
                 }
             }
 
-            if(mIsRunning == false){
+            if (mIsRunning == false) {
                 Draw();
             }
+        }
 
-    }
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int i) {}
